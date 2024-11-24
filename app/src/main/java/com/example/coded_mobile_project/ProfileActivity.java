@@ -17,7 +17,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_instructors);
+        setContentView(R.layout.activity_profile);
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
