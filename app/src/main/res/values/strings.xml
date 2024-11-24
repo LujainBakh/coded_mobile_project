@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Coded</string>
+    <string name="home">Home</string>
+    <string name="instrcutors">Instrcutors</string>
+    <string name="office_hours">Office Hours</string>
+    <string name="profile">Profile</string>
+</resources>
