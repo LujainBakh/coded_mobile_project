@@ -17,29 +17,6 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
-        bottomNavigationView.setSelectedItemId(R.id.profile);
 
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.home) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                finish();
-                return true;
-            } else if (item.getItemId() == R.id.instrcutors) {
-                startActivity(new Intent(getApplicationContext(), InstructorsActivity.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                finish();
-                return true;
-            } else if (item.getItemId() == R.id.Officehours) {
-                startActivity(new Intent(getApplicationContext(), OfficeHoursActivity.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                finish();
-                return true;
-            } else if (item.getItemId() == R.id.profile) {
-                return true;
-            }
-            return false;
-        });
     }
 }

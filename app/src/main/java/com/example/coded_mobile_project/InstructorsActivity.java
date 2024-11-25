@@ -33,8 +33,8 @@ public class InstructorsActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
                 return true;
-            } else if (item.getItemId() == R.id.profile) {
-                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+            } else if (item.getItemId() == R.id.calendar) {
+                startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
                 return true;
