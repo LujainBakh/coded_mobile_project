@@ -4,4 +4,6 @@
     <string name="instrcutors">Instrcutors</string>
     <string name="office_hours">Office Hours</string>
     <string name="profile">Profile</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
 </resources>
