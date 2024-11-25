@@ -12,14 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Coded_mobile_project"
         tools:targetApi="31">
-
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
         <!-- MainActivity with NavigationDrawer integration -->
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
@@ -27,9 +30,7 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
-
-        <!-- Other activities -->
+        </activity> <!-- Other activities -->
         <activity
             android:name=".CalendarActivity"
             android:exported="false" />
@@ -42,7 +43,6 @@
         <activity
             android:name=".InstructorsActivity"
             android:exported="false" />
-
     </application>
 
 </manifest>
