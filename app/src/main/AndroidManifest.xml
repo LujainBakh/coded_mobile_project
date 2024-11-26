@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.coded_mobile_project">
 
     <application
         android:allowBackup="true"
@@ -12,27 +13,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Coded_mobile_project"
         tools:targetApi="31">
+
+        <!-- Set LoginActivity as the launcher activity -->
         <activity
             android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SettingsActivity"
-            android:exported="false" /> <!-- MainActivity with NavigationDrawer integration -->
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Other activities -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-            <!-- Optional metadata for additional configurations -->
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity> <!-- Other activities -->
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
         <activity
             android:name=".CalendarActivity"
             android:exported="false" />
