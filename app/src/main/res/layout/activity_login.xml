@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@color/beige"
-    tools:context=".MainActivity">
+    tools:context=".LoginActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -39,11 +39,11 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/username"
+                android:id="@+id/email"
                 android:background="@drawable/custom_edittext"
                 android:drawableLeft="@drawable/ic_baseline_person_24"
                 android:drawablePadding="8dp"
-                android:hint="Username"
+                android:hint="Email"
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"
