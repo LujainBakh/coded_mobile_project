@@ -13,9 +13,11 @@
         android:theme="@style/Theme.Coded_mobile_project"
         tools:targetApi="31">
         <activity
-            android:name=".SettingsActivity"
+            android:name=".LoginActivity"
             android:exported="false" />
-        <!-- MainActivity with NavigationDrawer integration -->
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false" /> <!-- MainActivity with NavigationDrawer integration -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
