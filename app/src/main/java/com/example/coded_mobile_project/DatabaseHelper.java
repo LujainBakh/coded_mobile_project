@@ -44,6 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         try {
+            Log.d("DatabaseHelper", "Creating database and inserting dummy users");
             db.execSQL(TABLE_CREATE);
             insertDummyUsers(db); // Insert dummy users during database creation
         } catch (SQLException e) {
@@ -54,6 +55,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         try {
+            Log.d("DatabaseHelper", "Upgrading database");
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
             onCreate(db);
         } catch (SQLException e) {
@@ -61,12 +63,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    private void insertDummyUsers(SQLiteDatabase db) {
-        // Add Jood Hussain
-        insertUser(db, "Jood", "Hussain", "jood@gmail.com", "jood1234", "0501266130", "IAU", "CCSIT");
 
-        // Add another dummy user
-        insertUser(db, "Lujain", "Bakhurji", "Lujain@gmail.com", "lujain1234", "0501244789", "IAU", "CCSIT");
+
+    private void insertDummyUsers(SQLiteDatabase db) {
+        db.beginTransaction();
+        try {
+            // Add Jood Hussain
+            insertUser(db, "Jood", "Hussain", "jood@gmail.com", "jood1234", "0501266130", "IAU", "CCSIT");
+
+            // Add Lujain Bakhurji
+            insertUser(db, "Lujain", "Bakhurji", "lujain@gmail.com", "lujain1234", "0501244789", "IAU", "CCSIT");
+
+            // More dummy users can be added here
+
+            db.setTransactionSuccessful();
+            Log.d("DatabaseHelper", "Dummy users inserted successfully");
+        } catch (SQLException e) {
+            Log.e("DatabaseHelper", "Error inserting dummy users", e);
+        } finally {
+            db.endTransaction();
+        }
     }
 
     private void insertUser(SQLiteDatabase db, String firstName, String lastName, String email, String password, String phone, String university, String college) {
@@ -84,12 +100,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             if (result == -1) {
                 Log.e("DatabaseHelper", "Error inserting user: " + firstName + " " + lastName);
             } else {
-                Log.d("DatabaseHelper", "User inserted: " + firstName + " " + lastName);
+                Log.d("DatabaseHelper", "User inserted: " + firstName + " " + lastName + " " + email + " " + password);
             }
         } catch (SQLException e) {
             Log.e("DatabaseHelper", "Error inserting user: " + firstName + " " + lastName, e);
         }
     }
+
 
     // Method to add a user with additional attributes (can be called by UserDao)
     public long addUser(User user) {

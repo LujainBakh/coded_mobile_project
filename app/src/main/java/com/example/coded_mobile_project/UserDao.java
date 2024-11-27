@@ -3,6 +3,7 @@ package com.example.coded_mobile_project;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class UserDao {
 
@@ -33,8 +34,21 @@ public class UserDao {
         };
         String selection = DatabaseHelper.COLUMN_EMAIL + " = ?";
         String[] selectionArgs = { email };
+        Log.d("UserDao", "Querying user by email: " + email);
         return database.query(DatabaseHelper.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
     }
+    public boolean verifyUser(String email, String password) {
+        String[] columns = { DatabaseHelper.COLUMN_ID };
+        String selection = DatabaseHelper.COLUMN_EMAIL + " = ? AND " + DatabaseHelper.COLUMN_PASSWORD + " = ?";
+        String[] selectionArgs = { email, password };
+        Cursor cursor = database.query(DatabaseHelper.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
+        boolean isUserValid = (cursor != null && cursor.getCount() > 0);
+        if (cursor != null) {
+            cursor.close();
+        }
+        return isUserValid;
+    }
+
 
     public void close() {
         dbHelper.close();

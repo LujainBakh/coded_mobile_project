@@ -1,7 +1,6 @@
 package com.example.coded_mobile_project;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,35 +30,34 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
 
         loginButton.setOnClickListener(view -> {
-            Cursor cursor = userDao.getUserByEmail(email.getText().toString());
-            if (cursor.moveToFirst()) {
-                String storedPassword = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_PASSWORD));
-                if (storedPassword.equals(password.getText().toString())) {
-                    Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                    // Log success
-                    Log.d("LoginActivity", "Login successful for email: " + email.getText().toString());
+            String emailInput = email.getText().toString();
+            String passwordInput = password.getText().toString();
+            Log.d("LoginActivity", "Attempting login with email: " + emailInput + " and password: " + passwordInput);
 
-                    // Navigate to MainActivity
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(LoginActivity.this, "Login Failed! Incorrect Password.", Toast.LENGTH_SHORT).show();
-                    // Log failure due to incorrect password
-                    Log.d("LoginActivity", "Login failed for email: " + email.getText().toString() + " - Incorrect password");
-                }
-            } else {
-                Toast.makeText(LoginActivity.this, "Login Failed! User not found.", Toast.LENGTH_SHORT).show();
-                // Log failure due to user not found
-                Log.d("LoginActivity", "Login failed for email: " + email.getText().toString() + " - User not found");
+            if (emailInput.isEmpty() || passwordInput.isEmpty()) {
+                Toast.makeText(LoginActivity.this, "Please enter both email and password.", Toast.LENGTH_SHORT).show();
+                Log.d("LoginActivity", "Email or password field is empty.");
+                return;
             }
-            cursor.close();
+
+            boolean isUserValid = userDao.verifyUser(emailInput, passwordInput);
+            if (isUserValid) {
+                Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                Log.d("LoginActivity", "Login successful for email: " + emailInput);
+
+                // Navigate to MainActivity
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(LoginActivity.this, "Login Failed! Incorrect email or password.", Toast.LENGTH_SHORT).show();
+                Log.d("LoginActivity", "Login failed for email: " + emailInput + " - Invalid credentials");
+            }
         });
     }
 
     @Override
     protected void onDestroy() {
         userDao.close();
-        super.onDestroy();
     }
 }
