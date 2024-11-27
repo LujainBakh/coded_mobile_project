@@ -63,7 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private void insertDummyUsers(SQLiteDatabase db) {
         // Add Jood Hussain
-        insertUser(db, "Jood", "Hussain", "jood@gmail.com", "1234567890", "0501266130", "IAU", "CCSIT");
+        insertUser(db, "Jood", "Hussain", "jood@gmail.com", "jood1234", "0501266130", "IAU", "CCSIT");
 
         // Add another dummy user
         insertUser(db, "Lujain", "Bakhurji", "Lujain@gmail.com", "lujain1234", "0501244789", "IAU", "CCSIT");
@@ -83,6 +83,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             long result = db.insert(TABLE_NAME, null, values);
             if (result == -1) {
                 Log.e("DatabaseHelper", "Error inserting user: " + firstName + " " + lastName);
+            } else {
+                Log.d("DatabaseHelper", "User inserted: " + firstName + " " + lastName);
             }
         } catch (SQLException e) {
             Log.e("DatabaseHelper", "Error inserting user: " + firstName + " " + lastName, e);
@@ -106,6 +108,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             result = db.insert(TABLE_NAME, null, values);
             if (result == -1) {
                 Log.e("DatabaseHelper", "Error inserting user");
+            } else {
+                Log.d("DatabaseHelper", "User inserted: " + user.getFirstName() + " " + user.getLastName());
             }
         } catch (SQLException e) {
             Log.e("DatabaseHelper", "Error inserting user", e);
