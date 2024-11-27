@@ -29,9 +29,6 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
 
-        // Insert a dummy user for testing
-        insertDummyUser();
-
         loginButton.setOnClickListener(view -> {
             Cursor cursor = userDao.getUserByEmail(email.getText().toString());
             if (cursor.moveToFirst()) {
@@ -51,16 +48,6 @@ public class LoginActivity extends AppCompatActivity {
             }
             cursor.close();
         });
-    }
-
-    // Method to insert a dummy user for testing
-    private void insertDummyUser() {
-        long result = userDao.addUser("John", "Doe", "john.doe@example.com", "password123", "1234567890", "Example University", "Example College");
-        if (result != -1) {
-            Toast.makeText(this, "Dummy user added!", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Failed to add dummy user!", Toast.LENGTH_SHORT).show();
-        }
     }
 
     @Override

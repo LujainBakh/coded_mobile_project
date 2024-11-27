@@ -1,8 +1,11 @@
 package com.example.coded_mobile_project;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -40,12 +43,75 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(TABLE_CREATE);
+        try {
+            db.execSQL(TABLE_CREATE);
+            insertDummyUsers(db); // Insert dummy users during database creation
+        } catch (SQLException e) {
+            Log.e("DatabaseHelper", "Error creating database", e);
+        }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
+        try {
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+            onCreate(db);
+        } catch (SQLException e) {
+            Log.e("DatabaseHelper", "Error upgrading database", e);
+        }
+    }
+
+    private void insertDummyUsers(SQLiteDatabase db) {
+        // Add Jood Hussain
+        insertUser(db, "Jood", "Hussain", "jood@gmail.com", "1234567890", "0501266130", "IAU", "CCSIT");
+
+        // Add another dummy user
+        insertUser(db, "Lujain", "Bakhurji", "Lujain@gmail.com", "lujain1234", "0501244789", "IAU", "CCSIT");
+    }
+
+    private void insertUser(SQLiteDatabase db, String firstName, String lastName, String email, String password, String phone, String university, String college) {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_FIRST_NAME, firstName);
+        values.put(COLUMN_LAST_NAME, lastName);
+        values.put(COLUMN_EMAIL, email);
+        values.put(COLUMN_PASSWORD, password);
+        values.put(COLUMN_PHONE, phone);
+        values.put(COLUMN_UNIVERSITY, university);
+        values.put(COLUMN_COLLEGE, college);
+
+        try {
+            long result = db.insert(TABLE_NAME, null, values);
+            if (result == -1) {
+                Log.e("DatabaseHelper", "Error inserting user: " + firstName + " " + lastName);
+            }
+        } catch (SQLException e) {
+            Log.e("DatabaseHelper", "Error inserting user: " + firstName + " " + lastName, e);
+        }
+    }
+
+    // Method to add a user with additional attributes (can be called by UserDao)
+    public long addUser(User user) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_FIRST_NAME, user.getFirstName());
+        values.put(COLUMN_LAST_NAME, user.getLastName());
+        values.put(COLUMN_EMAIL, user.getEmail());
+        values.put(COLUMN_PASSWORD, user.getPassword());
+        values.put(COLUMN_PHONE, user.getPhone());
+        values.put(COLUMN_UNIVERSITY, user.getUniversity());
+        values.put(COLUMN_COLLEGE, user.getCollege());
+
+        long result = -1;
+        try {
+            result = db.insert(TABLE_NAME, null, values);
+            if (result == -1) {
+                Log.e("DatabaseHelper", "Error inserting user");
+            }
+        } catch (SQLException e) {
+            Log.e("DatabaseHelper", "Error inserting user", e);
+        } finally {
+            db.close();
+        }
+        return result;
     }
 }
