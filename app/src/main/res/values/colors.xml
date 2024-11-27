@@ -5,6 +5,6 @@
     <color name="yellow">#FCF4D7</color>
     <color name="lightblue">#D6EFF0</color>
     <color name="darkblue">#7C97A0</color>
-    <color name="grey">#d2d2d2</color>
+    <color name="grey">#F6F6F6</color>
     <color name="cardview_dark_background">#323232</color>
 </resources>
