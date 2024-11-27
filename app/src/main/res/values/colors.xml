@@ -2,10 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="darkpurple">#692E82</color>
-    <color name="beige">#F2EEEB</color>
-    <color name="neongreen">#C7F88D</color>
-    <color name="lightblue">#97A1CC</color>
+    <color name="yellow">#FCF4D7</color>
+    <color name="lightblue">#D6EFF0</color>
+    <color name="darkblue">#7C97A0</color>
     <color name="grey">#d2d2d2</color>
     <color name="cardview_dark_background">#323232</color>
 </resources>
