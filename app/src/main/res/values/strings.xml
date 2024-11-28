@@ -9,8 +9,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="Profile">Map</string>
-    <string name="Settings">Map</string>
+    <string name="Profile">Profile</string>
+    <string name="Settings">Settings</string>
     <string name="Map">Map</string>
 
 </resources>
