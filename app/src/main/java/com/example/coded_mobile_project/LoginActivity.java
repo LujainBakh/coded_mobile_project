@@ -1,65 +1,91 @@
 package com.example.coded_mobile_project;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
-
     EditText email;
     EditText password;
     Button loginButton;
-    UserDao userDao;
+    DatabaseHelper dbHelp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbHelp=new DatabaseHelper(this);
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
-
-        userDao = new UserDao(this);
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
 
+//        loginButton.setOnClickListener(view -> {
+//            String emailInput = email.getText().toString();
+//            String passwordInput = password.getText().toString();
+//
+//            if(email.equals("")||password.equals(""))
+//                Toast.makeText(LoginActivity.this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
+//            else {
+//                Boolean checkCredentials = dbHelp.checkEmailPassword(email, password);
+//                if (checkCredentials == true) {
+//                    Toast.makeText(LoginActivity.this, "Login Successfully!", Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                    startActivity(intent);
+//                } else {
+//                    Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//        }
+//        loginButton.setOnClickListener(view -> {
+//            String emailInput = email.getText().toString().trim(); // Use trim to remove extra spaces
+//            String passwordInput = password.getText().toString().trim();
+//
+//            if (emailInput.isEmpty() || passwordInput.isEmpty()) {
+//                Toast.makeText(LoginActivity.this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
+//            } else {
+//                Boolean checkCredentials = dbHelp.checkEmailPassword(emailInput, passwordInput); // Pass trimmed strings
+//                if (checkCredentials) {
+//                    Toast.makeText(LoginActivity.this, "Login Successfully!", Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                    startActivity(intent);
+//                } else {
+//                    Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
         loginButton.setOnClickListener(view -> {
-            Cursor cursor = userDao.getUserByEmail(email.getText().toString());
-            if (cursor.moveToFirst()) {
-                String storedPassword = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_PASSWORD));
-                if (storedPassword.equals(password.getText().toString())) {
-                    Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                    // Log success
-                    Log.d("LoginActivity", "Login successful for email: " + email.getText().toString());
+            String emailInput = email.getText().toString().trim(); // Trim inputs
+            String passwordInput = password.getText().toString().trim();
 
-                    // Navigate to MainActivity
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(LoginActivity.this, "Login Failed! Incorrect Password.", Toast.LENGTH_SHORT).show();
-                    // Log failure due to incorrect password
-                    Log.d("LoginActivity", "Login failed for email: " + email.getText().toString() + " - Incorrect password");
-                }
+            if (emailInput.isEmpty() || passwordInput.isEmpty()) {
+                Toast.makeText(LoginActivity.this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(LoginActivity.this, "Login Failed! User not found.", Toast.LENGTH_SHORT).show();
-                // Log failure due to user not found
-                Log.d("LoginActivity", "Login failed for email: " + email.getText().toString() + " - User not found");
+                Boolean checkCredentials = dbHelp.checkEmailPassword(emailInput, passwordInput);
+                if (checkCredentials) {
+                    Toast.makeText(LoginActivity.this, "Login Successfully!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                }
             }
-            cursor.close();
         });
+
+
     }
 
     @Override
     protected void onDestroy() {
-        userDao.close();
         super.onDestroy();
     }
 }
