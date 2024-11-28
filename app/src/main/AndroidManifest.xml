@@ -13,18 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Coded_mobile_project"
         tools:targetApi="31">
-
         <!-- Set LoginActivity as the launcher activity -->
         <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Other activities -->
+        </activity> <!-- Other activities -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -43,6 +41,9 @@
             android:exported="false" />
         <activity
             android:name=".InstructorsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MapActivity"
             android:exported="false" />
     </application>
 
