@@ -9,12 +9,14 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.coded_mobile_project.databinding.ActivityLoginBinding;
+
 public class LoginActivity extends AppCompatActivity {
     EditText email;
     EditText password;
     Button loginButton;
     DatabaseHelper dbHelp;
-
+    ActivityLoginBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +24,10 @@ public class LoginActivity extends AppCompatActivity {
         dbHelp=new DatabaseHelper(this);
 
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_login);
+        binding=ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        //setContentView(R.layout.activity_login);
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
@@ -63,9 +68,9 @@ public class LoginActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
-        loginButton.setOnClickListener(view -> {
-            String emailInput = email.getText().toString().trim(); // Trim inputs
-            String passwordInput = password.getText().toString().trim();
+        binding.loginButton.setOnClickListener(view -> {
+            String emailInput = binding.email.getText().toString().trim(); // Trim inputs
+            String passwordInput = binding.password.getText().toString().trim();
 
             if (emailInput.isEmpty() || passwordInput.isEmpty()) {
                 Toast.makeText(LoginActivity.this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
