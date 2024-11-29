@@ -80,6 +80,10 @@ public class OfficeHoursActivity extends AppCompatActivity implements Navigation
             // Start GpaActivity
             Intent intent = new Intent(this, GpaCalculator.class);
             startActivity(intent);
+        } else if (item.getItemId() == R.id.nav_map) {
+            // Start MapActivity
+            Intent intent = new Intent(this, MapActivity.class);
+            startActivity(intent);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START); // Close the navigation drawer
