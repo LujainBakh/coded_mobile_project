@@ -72,11 +72,10 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
                 return true;
-            } else if (item.getItemId() == R.id.calendar) {
-                startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                finish();
-                return true;
+            }  else if (item.getItemId() == R.id.nav_map) {
+                // Start MapActivity
+                Intent intent = new Intent(this, MapActivity.class);
+                startActivity(intent);
             }
             return false;
         });
