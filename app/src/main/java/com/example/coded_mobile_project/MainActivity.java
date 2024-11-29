@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 finish();
                 return true;
             }
+
             return false;
         });
     }
@@ -104,6 +105,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (item.getItemId() == R.id.nav_settings) {
             // Start SettingsActivity
             Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        }else if (item.getItemId() == R.id.nav_calculate) {
+            // Start SettingsActivity
+            Intent intent = new Intent(this, GpaCalculator.class);
             startActivity(intent);
         }
 
