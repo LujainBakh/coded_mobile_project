@@ -2,8 +2,9 @@ package com.example.coded_mobile_project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -15,9 +16,22 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
+    private TextView liveClock;
+    private final Handler handler = new Handler();
+    private final Runnable clockRunnable = new Runnable() {
+        @Override
+        public void run() {
+            updateClock();
+            handler.postDelayed(this, 1000); // Update every second
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +53,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        // Set default fragment
-//        if (savedInstanceState == null) {
-//            getSupportFragmentManager().beginTransaction()
-//                    .replace(R.id.fragment_container, new HomeFragment())
-//                    .commit();
-//            navigationView.setCheckedItem(R.id.nav_home);
-//        }
+        // Initialize Live Clock
+        liveClock = findViewById(R.id.liveClock);
+        handler.post(clockRunnable); // Start the clock updates
 
         // Set up BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
@@ -74,6 +84,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
+    private void updateClock() {
+        String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+        liveClock.setText(currentTime);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(clockRunnable); // Stop clock updates when activity is destroyed
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -82,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.nav_settings) {
-            // Start ProfileActivity
+            // Start SettingsActivity
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         }
@@ -90,7 +110,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawer(GravityCompat.START); // Close the navigation drawer
         return true;
     }
-
 
     @Override
     public void onBackPressed() {
