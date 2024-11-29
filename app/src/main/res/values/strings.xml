@@ -12,5 +12,6 @@
     <string name="Profile">Profile</string>
     <string name="Settings">Settings</string>
     <string name="Map">Map</string>
+    <string name="GPA">GPA calculator</string>
 
 </resources>

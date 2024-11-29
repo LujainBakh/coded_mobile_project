@@ -22,6 +22,12 @@
             android:icon="@drawable/baseline_map_24"
             android:title="@string/Map"/>
 
+        <item
+            android:id="@+id/nav_calculate"
+            android:icon="@drawable/outline_calculate_24"
+            android:title="@string/GPA"/>
+
+
     </group>
 
 </menu>
