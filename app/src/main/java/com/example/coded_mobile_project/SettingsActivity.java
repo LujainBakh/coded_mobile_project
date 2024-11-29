@@ -86,6 +86,10 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
             startActivity(intent);
         } else if (item.getItemId() == R.id.nav_settings) {
             return true;
+        }   else if (item.getItemId() == R.id.nav_calculate) {
+            // Start GpaActivity
+            Intent intent = new Intent(this, GpaCalculator.class);
+            startActivity(intent);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START); // Close the navigation drawer
