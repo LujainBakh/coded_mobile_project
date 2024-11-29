@@ -22,15 +22,15 @@ public class SessionManager {
         return sharedPreferences.getBoolean(IS_LOGGED_IN, false);
     }
 
-    public static String getLoggedInEmail(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(USER_EMAIL, null);
-    }
+//    public static String getLoggedInEmail(Context context) {
+//        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+//        return sharedPreferences.getString(USER_EMAIL, null);
+//    }
 
-    public static void clearSession(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear(); // Remove all stored data
-        editor.apply();
-    }
+//    public static void clearSession(Context context) {
+//        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.clear(); // Remove all stored data
+//        editor.apply();
+//    }
 }
