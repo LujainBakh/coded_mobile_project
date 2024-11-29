@@ -110,6 +110,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // Start SettingsActivity
             Intent intent = new Intent(this, GpaCalculator.class);
             startActivity(intent);
+        } else if (item.getItemId() == R.id.nav_map) {
+            // Start MapActivity
+            Intent intent = new Intent(this, MapActivity.class);
+            startActivity(intent);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START); // Close the navigation drawer
