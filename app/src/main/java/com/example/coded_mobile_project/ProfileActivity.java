@@ -90,6 +90,14 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
             // Start MapActivity
             Intent intent = new Intent(this, MapActivity.class);
             startActivity(intent);
+        }   else if (item.getItemId() == R.id.nav_calculate) {
+            // Start GpaActivity
+            Intent intent = new Intent(this, GpaCalculator.class);
+            startActivity(intent);
+        }else if (item.getItemId() == R.id.nav_calculate) {
+            // Start GpaActivity
+            Intent intent = new Intent(this, GpaCalculator.class);
+            startActivity(intent);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START); // Close the navigation drawer

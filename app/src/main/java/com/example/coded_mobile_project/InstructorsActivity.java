@@ -75,6 +75,10 @@ public class InstructorsActivity extends AppCompatActivity implements Navigation
             // Start SettingsActivity
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
+        }else if (item.getItemId() == R.id.nav_calculate) {
+            // Start GpaActivity
+            Intent intent = new Intent(this, GpaCalculator.class);
+            startActivity(intent);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START); // Close the navigation drawer

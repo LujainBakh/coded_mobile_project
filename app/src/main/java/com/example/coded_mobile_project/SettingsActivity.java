@@ -84,11 +84,7 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
             // Start ProfileActivity
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
-        }   else if (item.getItemId() == R.id.nav_map) {
-                // Start MapActivity
-                Intent intent = new Intent(this, MapActivity.class);
-                startActivity(intent);
-            } else if (item.getItemId() == R.id.nav_settings) {
+        } else if (item.getItemId() == R.id.nav_settings) {
             return true;
         }
 
