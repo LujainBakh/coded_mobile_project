@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         }else if (item.getItemId() == R.id.nav_calculate) {
-            // Start SettingsActivity
+            // Start GpaActivity
             Intent intent = new Intent(this, GpaCalculator.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.nav_map) {
