@@ -103,7 +103,7 @@ public class MapActivity extends AppCompatActivity implements
 
         // Adding Locations
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        LatLng IAU = new LatLng(26.392718, 50.186909);
+        LatLng IAU = new LatLng(26.391044, 50.187568);
         mMap.addMarker(new MarkerOptions().position(IAU).title("Imam Abdulrahman Bin Faisal University"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(IAU, 10));
 
