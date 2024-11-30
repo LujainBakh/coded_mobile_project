@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,7 +25,8 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     private DrawerLayout drawerLayout;
     private DatabaseHelper dbHelper;
 
-    private EditText firstName, lastName, phone, university, college;
+    private EditText email, university, firstName, lastName, phone;
+    private Spinner collegeSpinner;
     private Button updateButton;
     private String loggedInEmail;
 
@@ -75,17 +78,21 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
             return false;
         });
 
-        // Initialize UI components for profile
+        // Initialize UI components
+        email = findViewById(R.id.email);
+        university = findViewById(R.id.university);
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
         phone = findViewById(R.id.phone);
-        university = findViewById(R.id.university);
-        college = findViewById(R.id.college);
+        collegeSpinner = findViewById(R.id.collegeSpinner);
         updateButton = findViewById(R.id.updateButton);
 
         // Initialize DatabaseHelper and retrieve logged-in user's email
         dbHelper = new DatabaseHelper(this);
         loggedInEmail = SessionManager.getLoggedInUserEmail(this);
+
+        // Populate college dropdown
+        populateCollegeSpinner();
 
         // Load user profile data
         loadUserProfile();
@@ -95,14 +102,15 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
             String updatedFirstName = firstName.getText().toString().trim();
             String updatedLastName = lastName.getText().toString().trim();
             String updatedPhone = phone.getText().toString().trim();
-            String updatedUniversity = university.getText().toString().trim();
-            String updatedCollege = college.getText().toString().trim();
+            String selectedCollege = collegeSpinner.getSelectedItem().toString();
 
-            if (updatedFirstName.isEmpty() || updatedLastName.isEmpty() || updatedPhone.isEmpty()) {
+            if (!isValidPhoneNumber(updatedPhone)) {
+                Toast.makeText(ProfileActivity.this, "Phone number must start with 05 and be 10 digits long", Toast.LENGTH_SHORT).show();
+            } else if (updatedFirstName.isEmpty() || updatedLastName.isEmpty()) {
                 Toast.makeText(ProfileActivity.this, "Please fill all mandatory fields", Toast.LENGTH_SHORT).show();
             } else {
                 boolean isUpdated = dbHelper.updateUserProfile(loggedInEmail, updatedFirstName, updatedLastName,
-                        updatedPhone, updatedUniversity, updatedCollege);
+                        updatedPhone, university.getText().toString().trim(), selectedCollege);
 
                 if (isUpdated) {
                     Toast.makeText(ProfileActivity.this, "Profile Updated Successfully!", Toast.LENGTH_SHORT).show();
@@ -114,43 +122,63 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     }
 
     private void loadUserProfile() {
-        Cursor cursor = dbHelper.getUserProfile(loggedInEmail);
+        Cursor cursor = null;
+        try {
+            cursor = dbHelper.getUserProfile(loggedInEmail);
+            if (cursor != null && cursor.moveToFirst()) {
+                email.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_EMAIL)));
+                university.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_UNIVERSITY)));
+                firstName.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_FIRST_NAME)));
+                lastName.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_LAST_NAME)));
+                phone.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_PHONE)));
 
-        if (cursor != null && cursor.moveToFirst()) {
-            firstName.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_FIRST_NAME)));
-            lastName.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_LAST_NAME)));
-            phone.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_PHONE)));
-            university.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_UNIVERSITY)));
-            college.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_COLLEGE)));
-            cursor.close();
+                // Set the spinner selection based on the database value
+                String college = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_COLLEGE));
+                ArrayAdapter<CharSequence> adapter = (ArrayAdapter<CharSequence>) collegeSpinner.getAdapter();
+                if (adapter != null) {
+                    int position = adapter.getPosition(college);
+                    collegeSpinner.setSelection(position);
+                }
+
+                // Disable editing for email and university
+                email.setEnabled(false);
+                university.setEnabled(false);
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
         }
+    }
+
+    private void populateCollegeSpinner() {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.college_list, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        collegeSpinner.setAdapter(adapter);
+    }
+
+    private boolean isValidPhoneNumber(String phone) {
+        return phone.startsWith("05") && phone.length() == 10 && phone.matches("\\d+");
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.nav_profile) {
-            // Start ProfileActivity
-            return true;
+            return true; // Stay on this activity
         } else if (item.getItemId() == R.id.nav_settings) {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(this, SettingsActivity.class));
         } else if (item.getItemId() == R.id.nav_calculate) {
-            // Start GpaActivity
-            Intent intent = new Intent(this, GpaCalculator.class);
-            startActivity(intent);
+            startActivity(new Intent(this, GpaCalculator.class));
         } else if (item.getItemId() == R.id.nav_map) {
-            // Start MapActivity
-            Intent intent = new Intent(this, MapActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(this, MapActivity.class));
         } else if (item.getItemId() == R.id.nav_logout) {
-            // Handle Logout
             logout();
         }
 
         drawerLayout.closeDrawer(GravityCompat.START); // Close the navigation drawer
         return true;
     }
-
 
     private void logout() {
         // Clear the session using SessionManager
@@ -178,6 +206,8 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (dbHelper != null) dbHelper.close();
+        if (dbHelper != null) {
+            dbHelper.close();
+        }
     }
 }

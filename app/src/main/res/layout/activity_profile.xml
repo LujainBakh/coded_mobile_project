@@ -26,64 +26,74 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-        <!-- Fragment Container -->
-        <FrameLayout
+        <!-- Profile Form -->
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/fragment_container"
             android:layout_below="@id/toolbar"
-            android:background="@color/grey"/>
-
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
             android:padding="16dp">
 
-            <EditText
-                android:id="@+id/firstName"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="First Name"
-                android:inputType="textPersonName" />
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <EditText
-                android:id="@+id/lastName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Last Name"
-                android:inputType="textPersonName" />
+                <EditText
+                    android:id="@+id/firstName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="First Name"
+                    android:inputType="textPersonName"
+                    android:layout_marginTop="8dp" />
 
-            <EditText
-                android:id="@+id/phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Phone Number"
-                android:inputType="phone" />
+                <EditText
+                    android:id="@+id/lastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Last Name"
+                    android:inputType="textPersonName"
+                    android:layout_marginTop="8dp" />
 
-            <EditText
-                android:id="@+id/university"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="University"
-                android:inputType="text" />
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:enabled="false" />
 
-            <EditText
-                android:id="@+id/college"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="College"
-                android:inputType="text" />
+                <EditText
+                    android:id="@+id/university"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="University"
+                    android:inputType="text"
+                    android:enabled="false"
+                    android:layout_marginTop="8dp" />
 
-            <Button
-                android:id="@+id/updateButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Update Profile"
-                android:layout_marginTop="16dp" />
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Phone Number"
+                    android:inputType="phone"
+                    android:layout_marginTop="8dp" />
 
+                <Spinner
+                    android:id="@+id/collegeSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp" />
+
+                <Button
+                    android:id="@+id/updateButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Update Profile"
+                    android:layout_marginTop="16dp" />
+            </LinearLayout>
+        </ScrollView>
 
         <!-- Bottom Navigation -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -101,6 +111,7 @@
             app:itemRippleColor="@android:color/transparent"
             app:labelVisibilityMode="unlabeled"
             app:menu="@menu/bottom_menu" />
+
     </RelativeLayout>
 
     <!-- Navigation Drawer -->
@@ -114,5 +125,6 @@
         android:background="@color/white"
         app:itemIconTint="@color/darkblue"
         app:itemTextColor="@color/darkblue" />
+
 
 </androidx.drawerlayout.widget.DrawerLayout>
