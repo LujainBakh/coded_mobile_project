@@ -15,13 +15,6 @@
     <string name="GPA">GPA Calculator</string>
     <string name="logout">Log out</string>
 
-    <string-array name="college_list">
-        <item>College of Computer Science and Information Technology</item>
-        <item>College of Business Administration</item>
-        <item>College of Medicine</item>
-        <item>College of Interior Design</item>
-    </string-array>
-
 
 
 </resources>

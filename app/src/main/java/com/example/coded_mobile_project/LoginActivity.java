@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
                     "Hariri", // Last Name
                     "22100001234@iau.edu.sa", // Email
                     "password123", // Password
-                    "1234567890", // Phone
+                    "0505800101", // Phone
                     "Imam Abdulrahman Bin Faisal University", // University
                     "College of Computer Science and Information Technology" // College
             );

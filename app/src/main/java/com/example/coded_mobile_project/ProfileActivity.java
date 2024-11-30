@@ -4,10 +4,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,7 +25,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     private DatabaseHelper dbHelper;
 
     private EditText email, university, firstName, lastName, phone;
-    private Spinner collegeSpinner;
+    private TextView college;
     private Button updateButton;
     private String loggedInEmail;
 
@@ -84,15 +83,12 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
         phone = findViewById(R.id.phone);
-        collegeSpinner = findViewById(R.id.collegeSpinner);
+        college = findViewById(R.id.college);
         updateButton = findViewById(R.id.updateButton);
 
         // Initialize DatabaseHelper and retrieve logged-in user's email
         dbHelper = new DatabaseHelper(this);
         loggedInEmail = SessionManager.getLoggedInUserEmail(this);
-
-        // Populate college dropdown
-        populateCollegeSpinner();
 
         // Load user profile data
         loadUserProfile();
@@ -102,7 +98,6 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
             String updatedFirstName = firstName.getText().toString().trim();
             String updatedLastName = lastName.getText().toString().trim();
             String updatedPhone = phone.getText().toString().trim();
-            String selectedCollege = collegeSpinner.getSelectedItem().toString();
 
             if (!isValidPhoneNumber(updatedPhone)) {
                 Toast.makeText(ProfileActivity.this, "Phone number must start with 05 and be 10 digits long", Toast.LENGTH_SHORT).show();
@@ -110,7 +105,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 Toast.makeText(ProfileActivity.this, "Please fill all mandatory fields", Toast.LENGTH_SHORT).show();
             } else {
                 boolean isUpdated = dbHelper.updateUserProfile(loggedInEmail, updatedFirstName, updatedLastName,
-                        updatedPhone, university.getText().toString().trim(), selectedCollege);
+                        updatedPhone, university.getText().toString().trim(), college.getText().toString());
 
                 if (isUpdated) {
                     Toast.makeText(ProfileActivity.this, "Profile Updated Successfully!", Toast.LENGTH_SHORT).show();
@@ -131,31 +126,18 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 firstName.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_FIRST_NAME)));
                 lastName.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_LAST_NAME)));
                 phone.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_PHONE)));
+                college.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_COLLEGE)));
 
-                // Set the spinner selection based on the database value
-                String college = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_COLLEGE));
-                ArrayAdapter<CharSequence> adapter = (ArrayAdapter<CharSequence>) collegeSpinner.getAdapter();
-                if (adapter != null) {
-                    int position = adapter.getPosition(college);
-                    collegeSpinner.setSelection(position);
-                }
-
-                // Disable editing for email and university
+                // Disable editing for email, university, and college
                 email.setEnabled(false);
                 university.setEnabled(false);
+                college.setEnabled(false);
             }
         } finally {
             if (cursor != null) {
                 cursor.close();
             }
         }
-    }
-
-    private void populateCollegeSpinner() {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.college_list, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        collegeSpinner.setAdapter(adapter);
     }
 
     private boolean isValidPhoneNumber(String phone) {
