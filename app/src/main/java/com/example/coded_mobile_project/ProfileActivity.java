@@ -129,17 +129,41 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.nav_profile) {
-            return true; // We're already on the profile screen
+            // Start ProfileActivity
+            return true;
         } else if (item.getItemId() == R.id.nav_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
+        } else if (item.getItemId() == R.id.nav_calculate) {
+            // Start GpaActivity
+            Intent intent = new Intent(this, GpaCalculator.class);
+            startActivity(intent);
         } else if (item.getItemId() == R.id.nav_map) {
+            // Start MapActivity
             Intent intent = new Intent(this, MapActivity.class);
             startActivity(intent);
+        } else if (item.getItemId() == R.id.nav_logout) {
+            // Handle Logout
+            logout();
         }
 
-        drawerLayout.closeDrawer(GravityCompat.START); // Close navigation drawer
+        drawerLayout.closeDrawer(GravityCompat.START); // Close the navigation drawer
         return true;
+    }
+
+
+    private void logout() {
+        // Clear the session using SessionManager
+        SessionManager.clearSession(this);
+
+        // Show a toast message for feedback
+        Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+
+        // Redirect to LoginActivity
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear activity stack
+        startActivity(intent);
+        finish(); // Close current activity
     }
 
     @Override

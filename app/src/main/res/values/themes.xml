@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Coded_mobile_project" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">@color/darkblue</item>
-        <item name="colorPrimaryVariant">@color/lightblue</item>
+        <item name="colorPrimary">@color/lightblue</item>
+        <item name="colorPrimaryVariant">@color/darkblue</item>
 
     </style>
     <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
