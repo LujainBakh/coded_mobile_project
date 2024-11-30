@@ -117,13 +117,13 @@ public class MapActivity extends AppCompatActivity implements
 
 
         // Add markers for each location
-        mMap.addMarker(new MarkerOptions().position(MsAmal).title("Ms. Amal AlHajri's Office: Building 650, Second floor office no.205-H"));
+        mMap.addMarker(new MarkerOptions().position(MsAmal).title("Ms. Amal AlHajri's Office: Building 650, Second floor no.205-H"));
         mMap.addMarker(new MarkerOptions().position(IAUGirls).title("College of Computer Science and Information Technology (Ladies Section)"));
         mMap.addMarker(new MarkerOptions().position(A11).title("College of Computer Science and Information Technology"));
         mMap.addMarker(new MarkerOptions().position(Library).title("Central Library IAU"));
         mMap.addMarker(new MarkerOptions().position(Library2).title("Central Library 2 IAU"));
-        mMap.addMarker(new MarkerOptions().position(MsLayan).title("Ms. Layan AlNahdi's Office: Building 650, First floor office no.104-B"));
-        mMap.addMarker(new MarkerOptions().position(MrFaisal).title("Mr. Faisal AlGhamdi's Office: Building A11, Second floor office no.202"));
+        mMap.addMarker(new MarkerOptions().position(MsLayan).title("Ms. Layan AlNahdi's Office: Building 650, First floor no.104-B"));
+        mMap.addMarker(new MarkerOptions().position(MrFaisal).title("Mr. Faisal AlGhamdi's Office: Building A11, Second floor no.202"));
 
     }
 
