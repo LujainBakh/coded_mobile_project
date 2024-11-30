@@ -1,8 +1,11 @@
 package com.example.coded_mobile_project;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,13 +21,18 @@ import com.google.android.material.navigation.NavigationView;
 public class ProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
+    private DatabaseHelper dbHelper;
+
+    private EditText firstName, lastName, phone, university, college;
+    private Button updateButton;
+    private String loggedInEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        // Set up the Toolbar
+        // Set up Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -33,24 +41,15 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // Add toggle button to handle the navigation drawer open/close
+        // Add toggle button for navigation drawer
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        // Set default fragment
-//        if (savedInstanceState == null) {
-//            getSupportFragmentManager().beginTransaction()
-//                    .replace(R.id.fragment_container, new HomeFragment())
-//                    .commit();
-//            navigationView.setCheckedItem(R.id.nav_home);
-//        }
-
         // Set up BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
-
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home) {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -75,27 +74,73 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
             }
             return false;
         });
+
+        // Initialize UI components for profile
+        firstName = findViewById(R.id.firstName);
+        lastName = findViewById(R.id.lastName);
+        phone = findViewById(R.id.phone);
+        university = findViewById(R.id.university);
+        college = findViewById(R.id.college);
+        updateButton = findViewById(R.id.updateButton);
+
+        // Initialize DatabaseHelper and retrieve logged-in user's email
+        dbHelper = new DatabaseHelper(this);
+        loggedInEmail = SessionManager.getLoggedInUserEmail(this);
+
+        // Load user profile data
+        loadUserProfile();
+
+        // Update Button functionality
+        updateButton.setOnClickListener(view -> {
+            String updatedFirstName = firstName.getText().toString().trim();
+            String updatedLastName = lastName.getText().toString().trim();
+            String updatedPhone = phone.getText().toString().trim();
+            String updatedUniversity = university.getText().toString().trim();
+            String updatedCollege = college.getText().toString().trim();
+
+            if (updatedFirstName.isEmpty() || updatedLastName.isEmpty() || updatedPhone.isEmpty()) {
+                Toast.makeText(ProfileActivity.this, "Please fill all mandatory fields", Toast.LENGTH_SHORT).show();
+            } else {
+                boolean isUpdated = dbHelper.updateUserProfile(loggedInEmail, updatedFirstName, updatedLastName,
+                        updatedPhone, updatedUniversity, updatedCollege);
+
+                if (isUpdated) {
+                    Toast.makeText(ProfileActivity.this, "Profile Updated Successfully!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ProfileActivity.this, "Failed to Update Profile", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
+    private void loadUserProfile() {
+        Cursor cursor = dbHelper.getUserProfile(loggedInEmail);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            firstName.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_FIRST_NAME)));
+            lastName.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_LAST_NAME)));
+            phone.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_PHONE)));
+            university.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_UNIVERSITY)));
+            college.setText(cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_COLLEGE)));
+            cursor.close();
+        }
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.nav_profile) {
-            return true;
+            return true; // We're already on the profile screen
         } else if (item.getItemId() == R.id.nav_settings) {
-            // Start ProfileActivity
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.nav_map) {
-            // Start MapActivity
             Intent intent = new Intent(this, MapActivity.class);
             startActivity(intent);
         }
 
-        drawerLayout.closeDrawer(GravityCompat.START); // Close the navigation drawer
+        drawerLayout.closeDrawer(GravityCompat.START); // Close navigation drawer
         return true;
     }
-
 
     @Override
     public void onBackPressed() {
@@ -104,5 +149,11 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (dbHelper != null) dbHelper.close();
     }
 }

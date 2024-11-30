@@ -6,50 +6,50 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.coded_mobile_project.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText email;
-    EditText password;
-    Button loginButton;
-    DatabaseHelper dbHelp;
-    ActivityLoginBinding binding;
+    private EditText email;
+    private EditText password;
+    private Button loginButton;
+    private DatabaseHelper dbHelp;
+    private ActivityLoginBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dbHelp = new DatabaseHelper(this);
 
-        // Insert a test user into the database
-        boolean isInserted = dbHelp.insertData(
-                1, // User ID
-                "John", // First Name
-                "Doe", // Last Name
-                "johndoe@example.com", // Email
-                "password123", // Password
-                "1234567890", // Phone
-                "Default University", // University
-                "Default College" // College
-        );
+        // Insert a test user into the database (if not already exists)
+        if (!dbHelp.checkEmail("johndoe@example.com")) {
+            boolean isInserted = dbHelp.insertData(
+                    "John", // First Name
+                    "Doe", // Last Name
+                    "johndoe@example.com", // Email
+                    "password123", // Password
+                    "1234567890", // Phone
+                    "Default University", // University
+                    "Default College" // College
+            );
 
-        if (isInserted) {
-            System.out.println("Test user added successfully");
-        } else {
-            System.out.println("Failed to add test user");
+            if (isInserted) {
+                System.out.println("Test user added successfully");
+            } else {
+                System.out.println("Failed to add test user");
+            }
         }
 
         // Check if user is already logged in
         if (SessionManager.isLoggedIn(this)) {
-            // User is logged in, redirect to MainActivity
+            // Redirect to MainActivity
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
-            finish(); // Close LoginActivity to prevent going back to it
+            finish(); // Close LoginActivity to prevent going back
         }
 
-        EdgeToEdge.enable(this);
+        // Set up binding and UI elements
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
 
+        // Login Button Click Listener
         binding.loginButton.setOnClickListener(view -> {
             String emailInput = binding.email.getText().toString().trim(); // Trim inputs
             String passwordInput = binding.password.getText().toString().trim();
@@ -64,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
             if (emailInput.isEmpty() || passwordInput.isEmpty()) {
                 Toast.makeText(LoginActivity.this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
             } else {
-                Boolean checkCredentials = dbHelp.checkEmailPassword(emailInput, passwordInput);
+                boolean checkCredentials = dbHelp.checkEmailPassword(emailInput, passwordInput);
                 if (checkCredentials) {
                     // Save login state using Shared Preferences
                     SessionManager.saveLoginState(LoginActivity.this, true, emailInput);
@@ -83,5 +84,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (dbHelp != null) {
+            dbHelp.close(); // Close database helper to free resources
+        }
     }
 }
