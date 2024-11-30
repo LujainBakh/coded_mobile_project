@@ -110,11 +110,21 @@ public class MapActivity extends AppCompatActivity implements
         LatLng MsAmal = new LatLng(26.385577, 50.189821);
         LatLng IAUGirls = new LatLng(26.385035, 50.188979);
         LatLng A11 = new LatLng(26.394855, 50.195700);
+        LatLng Library = new LatLng(26.393850, 50.190106);
+        LatLng Library2 = new LatLng(26.390256, 50.183881);
+        LatLng MsLayan = new LatLng(26.385394, 50.190006);
+        LatLng MrFaisal = new LatLng(26.394423, 50.195471);
+
 
         // Add markers for each location
-        mMap.addMarker(new MarkerOptions().position(MsAmal).title("Ms. Amal AlHajri's Office Building 650, Second floor office no.205-H"));
+        mMap.addMarker(new MarkerOptions().position(MsAmal).title("Ms. Amal AlHajri's Office: Building 650, Second floor office no.205-H"));
         mMap.addMarker(new MarkerOptions().position(IAUGirls).title("College of Computer Science and Information Technology (Ladies Section)"));
-        mMap.addMarker(new MarkerOptions().position(A11).title("College of Computer Science and Information Technology\n"));
+        mMap.addMarker(new MarkerOptions().position(A11).title("College of Computer Science and Information Technology"));
+        mMap.addMarker(new MarkerOptions().position(Library).title("Central Library IAU"));
+        mMap.addMarker(new MarkerOptions().position(Library2).title("Central Library 2 IAU"));
+        mMap.addMarker(new MarkerOptions().position(MsLayan).title("Ms. Layan AlNahdi's Office: Building 650, First floor office no.104-B"));
+        mMap.addMarker(new MarkerOptions().position(MrFaisal).title("Mr. Faisal AlGhamdi's Office: Building A11, Second floor office no.202"));
+
     }
 
     private void enableMyLocation() {
