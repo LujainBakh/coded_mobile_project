@@ -29,11 +29,11 @@
         <!-- Square Layout with Welcome Message, Clock, and Icon -->
         <LinearLayout
             android:id="@+id/squareContainer"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="350dp"
+            android:layout_height="150dp"
             android:layout_below="@id/toolbar"
             android:orientation="vertical"
-            android:background="@color/darkblue"
+            android:background="@drawable/box_background"
             android:gravity="center"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp">
@@ -42,11 +42,17 @@
                 android:id="@+id/welcomeMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Welcome to Coded!"
-                android:textSize="18sp"
-                android:textColor="@android:color/white"
                 android:layout_gravity="center_horizontal"
-                android:padding="8dp" />
+                android:fontFamily="monospace"
+                android:padding="12dp"
+                android:shadowColor="@color/darkblue"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="7"
+                android:text="Welcome to Coded!"
+                android:textColor="@android:color/white"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/liveClock"
@@ -56,14 +62,13 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
+                android:shadowColor="@color/darkblue"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="7"
                 android:layout_marginTop="16dp" />
 
-            <ImageView
-                android:id="@+id/iconView"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/ic_launcher_foreground"
-                android:layout_marginTop="16dp" />
+
         </LinearLayout>
 
         <!-- Bottom Navigation -->
