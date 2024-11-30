@@ -86,7 +86,7 @@ public class GpaCalculator extends AppCompatActivity implements NavigationView.O
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         }else if (item.getItemId() == R.id.nav_calculate) {
-           return true;
+            return true;
         } else if (item.getItemId() == R.id.nav_map) {
             // Start MapActivity
             Intent intent = new Intent(this, MapActivity.class);
@@ -104,5 +104,4 @@ public class GpaCalculator extends AppCompatActivity implements NavigationView.O
         } else {
             super.onBackPressed();
         }
-    }
-}
+    }}

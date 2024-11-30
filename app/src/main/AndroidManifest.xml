@@ -14,9 +14,11 @@
         android:theme="@style/Theme.Coded_mobile_project"
         tools:targetApi="31">
         <activity
-            android:name=".GpaCalculator"
+            android:name=".CourseAdapter"
             android:exported="false" />
-        <!-- Set LoginActivity as the launcher activity -->
+        <activity
+            android:name=".GpaCalculator"
+            android:exported="false" /> <!-- Set LoginActivity as the launcher activity -->
         <activity
             android:name=".LoginActivity"
             android:exported="true">

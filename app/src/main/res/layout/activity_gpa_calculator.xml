@@ -35,13 +35,7 @@
             android:background="@color/grey"/>
 
         <!-- Centered Text -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Calcu"
-            android:textColor="@color/black"
-            android:layout_centerInParent="true"
-            android:textSize="36sp" />
+
 
         <!-- Bottom Navigation -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
