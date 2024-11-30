@@ -101,11 +101,20 @@ public class MapActivity extends AppCompatActivity implements
         // Enable location tracking
         enableMyLocation();
 
-        // Add a marker and move the camera to a sample location (e.g., Sydney)
+        // Adding Locations
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        LatLng sampleLocation = new LatLng(26.385035, 50.188979); // Example: Sydney
-        mMap.addMarker(new MarkerOptions().position(sampleLocation).title("Marker in IAU, College of Computer Science and Information Technology (Ladies Section)"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sampleLocation, 10));
+        LatLng IAU = new LatLng(26.392718, 50.186909);
+        mMap.addMarker(new MarkerOptions().position(IAU).title("Imam Abdulrahman Bin Faisal University"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(IAU, 10));
+
+        LatLng MsAmal = new LatLng(26.385577, 50.189821);
+        LatLng IAUGirls = new LatLng(26.385035, 50.188979);
+        LatLng A11 = new LatLng(26.394855, 50.195700);
+
+        // Add markers for each location
+        mMap.addMarker(new MarkerOptions().position(MsAmal).title("Ms. Amal AlHajri's Office Building 650, Second floor office no.205-H"));
+        mMap.addMarker(new MarkerOptions().position(IAUGirls).title("College of Computer Science and Information Technology (Ladies Section)"));
+        mMap.addMarker(new MarkerOptions().position(A11).title("College of Computer Science and Information Technology\n"));
     }
 
     private void enableMyLocation() {
