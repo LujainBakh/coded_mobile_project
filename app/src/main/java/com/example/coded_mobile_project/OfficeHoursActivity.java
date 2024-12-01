@@ -33,7 +33,7 @@ public class OfficeHoursActivity extends AppCompatActivity implements Navigation
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_office_hours); // Layout with appointment booking elements
+        setContentView(R.layout.activity_office_hour); // Layout with appointment booking elements
 
         // Set up the Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
