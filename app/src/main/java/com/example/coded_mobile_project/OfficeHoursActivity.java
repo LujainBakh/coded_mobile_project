@@ -1,9 +1,15 @@
 package com.example.coded_mobile_project;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.DatePicker;
+import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -18,11 +24,16 @@ import com.google.android.material.navigation.NavigationView;
 public class OfficeHoursActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
+    private EditText instructorSearch;
+    private DatePicker datePicker;
+    private Spinner timeSpinner;
+    private Button searchButton;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_office_hours); // Update layout for OfficeHoursActivity
+        setContentView(R.layout.activity_office_hours); // Layout with appointment booking elements
 
         // Set up the Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -64,6 +75,38 @@ public class OfficeHoursActivity extends AppCompatActivity implements Navigation
             }
             return false;
         });
+
+        // Initialize appointment booking views
+        instructorSearch  = findViewById(R.id.instructorSearch);
+
+        datePicker = findViewById(R.id.datePicker);
+        timeSpinner = findViewById(R.id.timeSpinner);
+        searchButton = findViewById(R.id.searchButton);
+
+        // Setup time options for the Spinner
+        String[] timeSlots = {"10:00 AM", "11:00 AM", "1:00 PM", "2:00 PM"};
+        ArrayAdapter<String> timeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timeSlots);
+        timeSpinner.setAdapter(timeAdapter);
+
+        // Handle search button click
+        searchButton.setOnClickListener(v -> {
+            // Get the entered instructor, date, and time
+            String instructor = instructorSearch.getText().toString();
+            int day = datePicker.getDayOfMonth();
+            int month = datePicker.getMonth() + 1; // Month is 0-indexed
+            int year = datePicker.getYear();
+            String selectedTime = timeSpinner.getSelectedItem().toString();
+
+            // Check if the instructor field is empty
+            if (instructor.isEmpty()) {
+                Toast.makeText(OfficeHoursActivity.this, "Please enter an instructor name", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Show a Toast confirming the booking
+            String bookingDetails = "Appointment booked with " + instructor + " on " + month + "/" + day + "/" + year + " at " + selectedTime;
+            Toast.makeText(OfficeHoursActivity.this, bookingDetails, Toast.LENGTH_LONG).show();
+        });
     }
 
     @Override
@@ -91,7 +134,6 @@ public class OfficeHoursActivity extends AppCompatActivity implements Navigation
         drawerLayout.closeDrawer(GravityCompat.START); // Close the navigation drawer
         return true;
     }
-
 
     private void logout() {
         // Clear the session using SessionManager

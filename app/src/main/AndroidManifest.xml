@@ -2,11 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.coded_mobile_project">
-
     <!-- Add permissions for accessing location -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-feature android:name="android.hardware.location.gps" android:required="true" />
+
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -22,12 +24,7 @@
         <!-- Google Maps API key metadata -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCQDfwfuwO_iQDVBsxixx7AYROlHD1PguE" />
-
-        <!-- Activities -->
-        <activity
-            android:name=".CourseAdapter"
-            android:exported="false" />
+            android:value="AIzaSyCQDfwfuwO_iQDVBsxixx7AYROlHD1PguE" /> <!-- Activities -->
         <activity
             android:name=".GpaCalculator"
             android:exported="false" />
@@ -36,6 +33,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -61,6 +59,8 @@
         <activity
             android:name=".MapActivity"
             android:exported="false" />
+
+
     </application>
 
 </manifest>
