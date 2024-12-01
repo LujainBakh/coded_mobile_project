@@ -36,6 +36,17 @@
             android:padding="16dp"
             android:gravity="center">
 
+            <!-- Search for Instructor Label -->
+            <TextView
+                android:id="@+id/instructorSearchLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Search for Instructor"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="sans-serif-medium"/>
+
             <!-- Instructor Search Field -->
             <EditText
                 android:id="@+id/instructorSearch"
@@ -46,6 +57,17 @@
                 android:inputType="text"
                 android:minHeight="48dp" />
 
+            <!-- Pick a Date Label -->
+            <TextView
+                android:id="@+id/datePickerLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pick a Date"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="sans-serif-medium"/>
+
             <!-- Date Picker -->
             <DatePicker
                 android:id="@+id/datePicker"
@@ -53,22 +75,33 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp" />
 
+            <!-- Pick a Time Label -->
+            <TextView
+                android:id="@+id/timePickerLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pick a Time"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="sans-serif-medium"/>
+
             <!-- Time Spinner (Drop-down) -->
             <Spinner
                 android:id="@+id/timeSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:minHeight="48dp" />
+                android:minHeight="50dp" />
 
-            <!-- Search Button -->
+            <!-- Book Appointment Button -->
             <Button
                 android:id="@+id/searchButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/lightblue"
+                android:background="@drawable/rounded_button"
                 android:text="Book Appointment"
-                android:textColor="#5D4037" />
+                android:textColor="#000000" />
         </LinearLayout>
 
         <!-- Bottom Navigation -->

@@ -1,39 +1,25 @@
 package com.example.coded_mobile_project;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
-import android.widget.DatePicker;
-import android.widget.ArrayAdapter;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 public class OfficeHoursActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
-    private EditText instructorSearch;
-    private DatePicker datePicker;
-    private Spinner timeSpinner;
-    private Button searchButton;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_office_hours); // Layout with appointment booking elements
+        setContentView(R.layout.activity_office_hour);
 
         // Set up the Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -52,7 +38,7 @@ public class OfficeHoursActivity extends AppCompatActivity implements Navigation
 
         // Set up BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
-        bottomNavigationView.setSelectedItemId(R.id.Officehours); // Default to Officehours menu item
+        bottomNavigationView.setSelectedItemId(R.id.Officehours); // Default to Officehour menu item
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home) {
@@ -76,58 +62,29 @@ public class OfficeHoursActivity extends AppCompatActivity implements Navigation
             return false;
         });
 
-        // Initialize appointment booking views
-        instructorSearch  = findViewById(R.id.instructorSearch);
-
-        datePicker = findViewById(R.id.datePicker);
-        timeSpinner = findViewById(R.id.timeSpinner);
-        searchButton = findViewById(R.id.searchButton);
-
-        // Setup time options for the Spinner
-        String[] timeSlots = {"10:00 AM", "11:00 AM", "1:00 PM", "2:00 PM"};
-        ArrayAdapter<String> timeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timeSlots);
-        timeSpinner.setAdapter(timeAdapter);
-
-        // Handle search button click
-        searchButton.setOnClickListener(v -> {
-            // Get the entered instructor, date, and time
-            String instructor = instructorSearch.getText().toString();
-            int day = datePicker.getDayOfMonth();
-            int month = datePicker.getMonth() + 1; // Month is 0-indexed
-            int year = datePicker.getYear();
-            String selectedTime = timeSpinner.getSelectedItem().toString();
-
-            // Check if the instructor field is empty
-            if (instructor.isEmpty()) {
-                Toast.makeText(OfficeHoursActivity.this, "Please enter an instructor name", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            // Show a Toast confirming the booking
-            String bookingDetails = "Appointment booked with " + instructor + " on " + month + "/" + day + "/" + year + " at " + selectedTime;
-            Toast.makeText(OfficeHoursActivity.this, bookingDetails, Toast.LENGTH_LONG).show();
-        });
+        // Add the fragment dynamically
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new BookingFragment()) // fragment_container is a container for the fragment in your layout
+                    .commit();
+        }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.nav_profile) {
-            // Start ProfileActivity
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.nav_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.nav_calculate) {
-            // Start GpaActivity
             Intent intent = new Intent(this, GpaCalculator.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.nav_map) {
-            // Start MapActivity
             Intent intent = new Intent(this, MapActivity.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.nav_logout) {
-            // Handle Logout
             logout();
         }
 
@@ -136,25 +93,6 @@ public class OfficeHoursActivity extends AppCompatActivity implements Navigation
     }
 
     private void logout() {
-        // Clear the session using SessionManager
-        SessionManager.clearSession(this);
-
-        // Show a toast message for feedback
-        Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
-
-        // Redirect to LoginActivity
-        Intent intent = new Intent(this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear activity stack
-        startActivity(intent);
-        finish(); // Close current activity
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        // Handle logout logic here
     }
 }
