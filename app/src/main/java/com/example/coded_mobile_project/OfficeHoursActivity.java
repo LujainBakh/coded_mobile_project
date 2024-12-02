@@ -1,18 +1,19 @@
 package com.example.coded_mobile_project;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.DatePicker;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -24,7 +25,7 @@ import com.google.android.material.navigation.NavigationView;
 public class OfficeHoursActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
-    private EditText instructorSearch;
+    private Spinner instructorSearch;
     private DatePicker datePicker;
     private Spinner timeSpinner;
     private Button searchButton;
@@ -77,8 +78,7 @@ public class OfficeHoursActivity extends AppCompatActivity implements Navigation
         });
 
         // Initialize appointment booking views
-        instructorSearch  = findViewById(R.id.instructorSearch);
-
+        instructorSearch = findViewById(R.id.instructorSearch); // This is now a Spinner
         datePicker = findViewById(R.id.datePicker);
         timeSpinner = findViewById(R.id.timeSpinner);
         searchButton = findViewById(R.id.searchButton);
@@ -88,24 +88,43 @@ public class OfficeHoursActivity extends AppCompatActivity implements Navigation
         ArrayAdapter<String> timeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, timeSlots);
         timeSpinner.setAdapter(timeAdapter);
 
+        // Setup instructor options for the Spinner (predefined list of instructors)
+        String[] instructors = {"Dr. Smith", "Dr. Johnson", "Prof. Lee", "Dr. Brown", "Prof. Davis"};
+        ArrayAdapter<String> instructorAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, instructors);
+        instructorSearch.setAdapter(instructorAdapter); // Set the adapter for the Spinner
+
         // Handle search button click
         searchButton.setOnClickListener(v -> {
-            // Get the entered instructor, date, and time
-            String instructor = instructorSearch.getText().toString();
+            // Get the selected instructor, date, and time
+            String selectedInstructor = instructorSearch.getSelectedItem().toString(); // Correctly get selected item
             int day = datePicker.getDayOfMonth();
             int month = datePicker.getMonth() + 1; // Month is 0-indexed
             int year = datePicker.getYear();
             String selectedTime = timeSpinner.getSelectedItem().toString();
 
-            // Check if the instructor field is empty
-            if (instructor.isEmpty()) {
-                Toast.makeText(OfficeHoursActivity.this, "Please enter an instructor name", Toast.LENGTH_SHORT).show();
+            // Check if the instructor is selected
+            if (selectedInstructor.isEmpty()) {
+                Toast.makeText(OfficeHoursActivity.this, "Please select an instructor", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Show a Toast confirming the booking
-            String bookingDetails = "Appointment booked with " + instructor + " on " + month + "/" + day + "/" + year + " at " + selectedTime;
-            Toast.makeText(OfficeHoursActivity.this, bookingDetails, Toast.LENGTH_LONG).show();
+            // Show an AlertDialog confirming the appointment details
+            String bookingDetails = "Appointment booked with " + selectedInstructor + "\n" +
+                    "Date: " + month + "/" + day + "/" + year + "\n" +
+                    "Time: " + selectedTime;
+
+            new AlertDialog.Builder(OfficeHoursActivity.this)
+                    .setTitle("Confirm Appointment")
+                    .setMessage(bookingDetails)
+                    .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Handle booking confirmation, e.g., save to database or make network request
+                            Toast.makeText(OfficeHoursActivity.this, "Appointment Booked!", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton("Cancel", null) // Do nothing on cancel
+                    .show();
         });
     }
 
