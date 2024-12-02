@@ -89,7 +89,7 @@ public class OfficeHoursActivity extends AppCompatActivity implements Navigation
         timeSpinner.setAdapter(timeAdapter);
 
         // Setup instructor options for the Spinner (predefined list of instructors)
-        String[] instructors = {"Dr. Smith", "Dr. Johnson", "Prof. Lee", "Dr. Brown", "Prof. Davis"};
+        String[] instructors = {"Dr. Jood", "Dr. Amjad", "Prof. Layan", "Dr. Lujain", "Prof. Jood"};
         ArrayAdapter<String> instructorAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, instructors);
         instructorSearch.setAdapter(instructorAdapter); // Set the adapter for the Spinner
 
