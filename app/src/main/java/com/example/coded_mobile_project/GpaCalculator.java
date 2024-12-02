@@ -30,7 +30,9 @@ public class GpaCalculator extends AppCompatActivity implements NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gpa_calculator); // Update layout for CalendarActivity
-
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new GpaCalculatorFragment())
+                .commit();
         // Set up the Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -1,0 +1,77 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <EditText
+        android:id="@+id/courseName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Course Name"
+        android:backgroundTint="@color/lightblue"
+        android:textColor="@color/black"
+        android:textColorHint="@color/darkblue" />
+
+    <TextView
+        android:id="@+id/gradeLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Grade"
+        android:textSize="16sp"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp"
+        android:textColor="@color/black" />
+
+    <Spinner
+        android:id="@+id/courseGradeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:popupBackground="@color/white" />
+
+    <EditText
+        android:id="@+id/courseCredits"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Credits (e.g., 3)"
+        android:backgroundTint="@color/lightblue"
+        android:textColor="@color/black"
+        android:textColorHint="@color/darkblue"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Course"
+        android:backgroundTint="@color/darkblue"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/calculateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Calculate GPA"
+        android:backgroundTint="@color/darkblue"
+        android:textColor="@color/white" />
+
+    <ListView
+        android:id="@+id/courseListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/grey" />
+
+    <TextView
+        android:id="@+id/gpaTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your GPA: --"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:paddingTop="16dp" />
+</LinearLayout>

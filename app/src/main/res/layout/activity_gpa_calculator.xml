@@ -29,13 +29,11 @@
         <!-- Fragment Container -->
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:id="@+id/fragment_container"
             android:layout_below="@id/toolbar"
-            android:background="@color/grey"/>
-
-        <!-- Centered Text -->
-
+            android:layout_above="@id/bottomNavigation"
+            android:background="@color/grey" />
 
         <!-- Bottom Navigation -->
         <com.google.android.material.bottomnavigation.BottomNavigationView

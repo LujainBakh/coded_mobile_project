@@ -14,6 +14,16 @@
     <string name="Map">Map</string>
     <string name="GPA">GPA Calculator</string>
     <string name="logout">Log out</string>
-
+    <string-array name="grades_array">
+        <item>A+</item>
+        <item>A</item>
+        <item>B+</item>
+        <item>B</item>
+        <item>C+</item>
+        <item>C</item>
+        <item>D+</item>
+        <item>D</item>
+        <item>F</item>
+    </string-array>
 
 </resources>
