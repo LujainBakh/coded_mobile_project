@@ -127,7 +127,7 @@ public class GpaCalculatorFragment extends Fragment {
         double gpa = totalPoints / totalCredits;
 
         // Update GPA TextView
-        gpaTextView.setText(String.format("Your GPA: %.2f / 5", gpa));
+        gpaTextView.setText(String.format("Your GPA: %.2f ", gpa));
     }
 
     private double getGradePoint(String grade) {
