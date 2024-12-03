@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +59,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Initialize Live Clock
         liveClock = findViewById(R.id.liveClock);
         handler.post(clockRunnable); // Start the clock updates
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        ImageButton navButton = findViewById(R.id.navButton);
+
+        navButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
 
         // Set up BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
