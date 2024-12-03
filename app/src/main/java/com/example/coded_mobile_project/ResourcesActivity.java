@@ -2,12 +2,7 @@ package com.example.coded_mobile_project;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,27 +15,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class ResourcesActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
-    private TextView liveClock;
-    private final Handler handler = new Handler();
-    private final Runnable clockRunnable = new Runnable() {
-        @Override
-        public void run() {
-            updateClock();
-            handler.postDelayed(this, 1000); // Update every second
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_instructors); // Update layout for InstructorsActivity
 
         // Set up the Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -57,57 +39,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        // Initialize Live Clock
-        liveClock = findViewById(R.id.liveClock);
-        handler.post(clockRunnable); // Start the clock updates
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-        ImageButton navButton = findViewById(R.id.navButton);
-
-        navButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.openDrawer(GravityCompat.START);
-            }
-        });
-
-        // Initialize boxes
-        LinearLayout calculateGpaBox = findViewById(R.id.box1);
-        LinearLayout openMapBox = findViewById(R.id.box2);
-        LinearLayout resourcesBox = findViewById(R.id.box3);
-        LinearLayout contactUsBox = findViewById(R.id.box4);
-
-        // Add onClickListeners for each box
-        calculateGpaBox.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, GpaCalculator.class);
-            startActivity(intent);
-        });
-
-        openMapBox.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, MapActivity.class);
-            startActivity(intent);
-        });
-
-        resourcesBox.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ResourcesActivity.class);
-            startActivity(intent);
-        });
-
-        contactUsBox.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, MainActivity.class);
-            startActivity(intent);
-        });
         // Set up BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
-        bottomNavigationView.setSelectedItemId(R.id.home);
+
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
                 return true;
             } else if (item.getItemId() == R.id.instrcutors) {
                 startActivity(new Intent(getApplicationContext(), InstructorsActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
-                return true;
             } else if (item.getItemId() == R.id.Officehours) {
                 startActivity(new Intent(getApplicationContext(), OfficeHoursActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -119,20 +64,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 finish();
                 return true;
             }
-
             return false;
         });
-    }
-
-    private void updateClock() {
-        String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
-        liveClock.setText(currentTime);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        handler.removeCallbacks(clockRunnable); // Stop clock updates when activity is destroyed
     }
 
     @Override
