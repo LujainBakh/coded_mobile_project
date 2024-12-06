@@ -22,7 +22,7 @@ public class ResourcesActivity extends AppCompatActivity implements NavigationVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_instructors); // Update layout for InstructorsActivity
+        setContentView(R.layout.activity_resources); // Update layout for InstructorsActivity
 
         // Set up the Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);

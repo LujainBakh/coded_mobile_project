@@ -1,6 +1,7 @@
 package com.example.coded_mobile_project;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
@@ -93,9 +94,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         contactUsBox.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.iau.edu.sa/en/contact"));
             startActivity(intent);
         });
+
         // Set up BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
