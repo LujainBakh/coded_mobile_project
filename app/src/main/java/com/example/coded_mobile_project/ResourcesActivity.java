@@ -1,8 +1,10 @@
 package com.example.coded_mobile_project;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,7 +26,7 @@ public class ResourcesActivity extends AppCompatActivity implements NavigationVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resources); // Update layout for InstructorsActivity
 
-        // Set up the Toolbar
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -39,6 +41,32 @@ public class ResourcesActivity extends AppCompatActivity implements NavigationVi
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+
+        LinearLayout sisBox = findViewById(R.id.box1);
+        LinearLayout libraryBox = findViewById(R.id.box2);
+        LinearLayout bbBox = findViewById(R.id.box3);
+        LinearLayout iauBox = findViewById(R.id.box4);
+
+        // Add onClickListeners for each box
+        sisBox.setOnClickListener(v -> {
+            Intent intent = new Intent(ResourcesActivity.this, GpaCalculator.class);
+            startActivity(intent);
+        });
+
+        libraryBox.setOnClickListener(v -> {
+            Intent intent = new Intent(ResourcesActivity.this, MapActivity.class);
+            startActivity(intent);
+        });
+
+        bbBox.setOnClickListener(v -> {
+            Intent intent = new Intent(ResourcesActivity.this, ResourcesActivity.class);
+            startActivity(intent);
+        });
+
+        iauBox.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.iau.edu.sa/"));
+            startActivity(intent);
+        });
         // Set up BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
 
