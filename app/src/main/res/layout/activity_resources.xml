@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,7 +9,6 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
     tools:context=".ResourcesActivity">
-
 
     <!-- Main Content -->
     <RelativeLayout
@@ -28,10 +28,168 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Open navigation drawer"
             app:tint="@color/darkblue" />
+        <LinearLayout
+            android:id="@+id/squareContainer"
+            android:layout_width="350dp"
+            android:layout_height="150dp"
+            android:layout_below="@id/navButton"
+            android:orientation="vertical"
+            android:background="@drawable/box_background"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp">
 
+            <TextView
+                android:id="@+id/welcomeMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="monospace"
+                android:padding="12dp"
+                android:shadowColor="@color/darkblue"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="7"
+                android:text="Welcome to Coded!"
+                android:textColor="@android:color/black"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
+        </LinearLayout>
+        <!-- Four Boxes Grid -->
+        <GridLayout
+            android:id="@+id/boxContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:columnCount="2"
+            android:rowCount="2"
+            android:layout_margin="16dp"
+            android:padding="16dp">
 
+            <!-- Box 1 -->
+            <LinearLayout
+                android:id="@+id/box1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="@drawable/buttons_background"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="monospace"
+                    android:text="SIS"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="SIS Icon"
+                    android:src="@drawable/sis_icon" />
+            </LinearLayout>
+
+            <!-- Box 2 -->
+            <LinearLayout
+                android:id="@+id/box2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="@drawable/buttons_background_yellow"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="monospace"
+                    android:shadowColor="@color/darkblue"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:text="Blackboard"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="Blackboard icon"
+                    android:src="@drawable/blackboard_icon" />
+            </LinearLayout>
+
+            <!-- Box 3 -->
+            <LinearLayout
+                android:id="@+id/box3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="@drawable/buttons_background"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="monospace"
+                    android:text="E-library"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="Elibrary icon"
+                    android:src="@drawable/elibrary_icon" />
+            </LinearLayout>
+
+            <!-- Box 4 -->
+            <LinearLayout
+                android:id="@+id/box4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="@drawable/buttons_background_yellow"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="monospace"
+                    android:text="IAU website"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="Arrow icon"
+                    android:src="@drawable/baseline_home_filled_24" />
+            </LinearLayout>
+        </GridLayout>
 
         <!-- Bottom Navigation -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -50,17 +208,4 @@
             app:labelVisibilityMode="unlabeled"
             app:menu="@menu/bottom_menu" />
     </RelativeLayout>
-
-    <!-- Navigation Drawer -->
-    <com.google.android.material.navigation.NavigationView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/nav_view"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/nav_header"
-        app:menu="@menu/nav_menu"
-        android:background="@color/white"
-        app:itemIconTint="@color/darkblue"
-        app:itemTextColor="@color/darkblue" />
-
 </androidx.drawerlayout.widget.DrawerLayout>
