@@ -49,17 +49,17 @@ public class ResourcesActivity extends AppCompatActivity implements NavigationVi
 
         // Add onClickListeners for each box
         sisBox.setOnClickListener(v -> {
-            Intent intent = new Intent(ResourcesActivity.this, GpaCalculator.class);
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://sis.iau.edu.sa/"));
             startActivity(intent);
         });
 
         libraryBox.setOnClickListener(v -> {
-            Intent intent = new Intent(ResourcesActivity.this, MapActivity.class);
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://login.library.iau.edu.sa/login"));
             startActivity(intent);
         });
 
         bbBox.setOnClickListener(v -> {
-            Intent intent = new Intent(ResourcesActivity.this, ResourcesActivity.class);
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://vle.iau.edu.sa/"));
             startActivity(intent);
         });
 
