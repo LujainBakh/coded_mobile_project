@@ -35,14 +35,13 @@
             android:layout_below="@id/toolbar"
             android:background="@color/grey"/>
 
-        <!-- Centered Text -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Calendar"
-            android:textColor="@color/black"
-            android:layout_centerInParent="true"
-            android:textSize="36sp" />
+        <!-- Centered CalendarView -->
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+             />
 
         <!-- Bottom Navigation -->
         <com.google.android.material.bottomnavigation.BottomNavigationView

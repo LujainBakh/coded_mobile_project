@@ -1,8 +1,11 @@
 package com.example.coded_mobile_project;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.CalendarView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,8 +18,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-public class CalendarActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import java.util.Calendar;
+import java.util.HashMap;
 
+public class CalendarActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    CalendarView calendarView;
+    Calendar calendar;
+
+    // HashMap to store events
+    HashMap<String, String> eventsMap;
     private DrawerLayout drawerLayout;
 
     @Override
@@ -63,6 +73,32 @@ public class CalendarActivity extends AppCompatActivity implements NavigationVie
                 return true; // Stay on CalendarActivity
             }
             return false;
+        });
+        calendarView = findViewById(R.id.calendarView);
+        calendar = Calendar.getInstance();
+
+        // Initialize events
+        eventsMap = new HashMap<>();
+        eventsMap.put("18/12/2024", "Start the final exam");
+        eventsMap.put("02/01/2025", "End of semester one");
+        eventsMap.put("12/01/2025", "Start of semester two");
+        eventsMap.put("10/11/2024", "Start of spring vacation");
+
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
+                // Format the selected date to match the keys in the HashMap
+                String selectedDate = String.format("%02d/%02d/%04d", day, month + 1, year);
+
+                // Check if there's an event for the selected date
+                if (eventsMap.containsKey(selectedDate)) {
+                    // Show event in a dialog
+                    showEventDialog(selectedDate, eventsMap.get(selectedDate));
+                } else {
+                    // No event for the selected date
+                    Toast.makeText(CalendarActivity.this, "No events on this date.", Toast.LENGTH_SHORT).show();
+                }
+            }
         });
     }
 
@@ -114,5 +150,17 @@ public class CalendarActivity extends AppCompatActivity implements NavigationVie
         } else {
             super.onBackPressed();
         }
+    }
+    private void showEventDialog(String date, String event) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Event on " + date);
+        builder.setMessage(event);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss(); // Close the dialog
+            }
+        });
+        builder.show();
     }
 }
