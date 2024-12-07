@@ -3,6 +3,7 @@ package com.example.coded_mobile_project;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,13 +40,23 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        // Set default fragment
-//        if (savedInstanceState == null) {
-//            getSupportFragmentManager().beginTransaction()
-//                    .replace(R.id.fragment_container, new HomeFragment())
-//                    .commit();
-//            navigationView.setCheckedItem(R.id.nav_home);
-//        }
+        LinearLayout termsBox = findViewById(R.id.box1);
+        LinearLayout logoutBox = findViewById(R.id.box2);
+
+// Add onClickListeners for each box
+        termsBox.setOnClickListener(v -> {
+            // Replace the current activity's content with the TermsConditionsFragment
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(android.R.id.content, new TermsConditionsFragment())
+                    .addToBackStack(null)
+                    .commit();
+        });
+
+
+        logoutBox.setOnClickListener(v -> {
+            logout();
+        });
 
         // Set up BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
@@ -76,6 +87,7 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
             return false;
         });
     }
+
 
 
     @Override

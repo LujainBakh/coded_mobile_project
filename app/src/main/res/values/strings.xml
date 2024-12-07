@@ -26,4 +26,19 @@
         <item>F</item>
     </string-array>
 
+    <string name="terms_and_conditions">
+        <![CDATA[
+        <h2>Welcome to our mobile application</h2>
+        <p>Please carefully read these <b>Terms and Conditions</b>:</p>
+        <ol>
+            <li><b>Acceptance of Terms:</b> By accessing or using this app, you agree to these Terms and Conditions.</li>
+            <li><b>Usage of the App:</b> The app is for personal use only. Do not reverse-engineer or misuse this app.</li>
+            <li><b>User Responsibilities:</b> Keep your account credentials secure. Provide accurate information while using the app.</li>
+        </ol>
+        <p>By clicking <b>Agree</b>, you accept these Terms and Conditions.</p>
+        ]]>
+    </string>
+
+
+
 </resources>
