@@ -3,8 +3,10 @@ package com.example.coded_mobile_project;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,9 +19,22 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class ResourcesActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
+    private TextView liveClock;
+    private final Handler handler = new Handler();
+    private final Runnable clockRunnable = new Runnable() {
+        @Override
+        public void run() {
+            updateClock();
+            handler.postDelayed(this, 1000); // Update every second
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +49,9 @@ public class ResourcesActivity extends AppCompatActivity implements NavigationVi
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        liveClock = findViewById(R.id.liveClock);
+        handler.post(clockRunnable); // Start the clock updates
 
         // Add toggle button to handle the navigation drawer open/close
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -135,6 +153,11 @@ public class ResourcesActivity extends AppCompatActivity implements NavigationVi
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear activity stack
         startActivity(intent);
         finish(); // Close current activity
+    }
+
+    private void updateClock() {
+        String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+        liveClock.setText(currentTime);
     }
 
     @Override
