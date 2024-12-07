@@ -94,9 +94,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         contactUsBox.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.iau.edu.sa/en/contact"));
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:0133333766"));
             startActivity(intent);
         });
+
 
         // Set up BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
