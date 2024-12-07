@@ -55,6 +55,21 @@
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/liveClock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00:00"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:textColor="@android:color/black"
+                android:shadowColor="@color/darkblue"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="7"
+                android:layout_marginTop="16dp" />
+
         </LinearLayout>
         <!-- Four Boxes Grid -->
         <GridLayout
