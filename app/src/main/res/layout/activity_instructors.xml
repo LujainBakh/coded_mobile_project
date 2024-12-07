@@ -6,13 +6,13 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_light"
     tools:context=".InstructorsActivity">
 
     <!-- Main Content -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/newbg">
+        android:layout_height="match_parent">
 
         <!-- Toolbar -->
         <androidx.appcompat.widget.Toolbar
@@ -37,11 +37,21 @@
             android:textSize="16sp"
             android:inputType="text" />
 
+        <!-- Loading Indicator -->
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/search_box"
+            android:layout_marginTop="16dp"
+            android:visibility="gone" />
+
         <!-- Scrollable Instructor List -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/search_box"
+            android:layout_below="@id/progress_bar"
             android:padding="8dp">
 
             <LinearLayout

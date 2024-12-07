@@ -4,7 +4,20 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:elevation="2dp"
+    android:layout_marginBottom="8dp">
+
+    <!-- Profile Picture -->
+    <ImageView
+        android:id="@+id/instructor_image"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/profile_placeholder"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center"
+        android:contentDescription="Instructor Image"
+        android:layout_marginBottom="8dp" />
 
     <!-- Instructor Name -->
     <TextView
@@ -14,7 +27,8 @@
         android:text="Instructor Name"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:layout_gravity="center" />
 
     <!-- Biography -->
     <TextView
@@ -24,37 +38,74 @@
         android:text="Biography and qualifications"
         android:textSize="14sp"
         android:textColor="@android:color/black"
-        android:layout_marginTop="4dp" />
+        android:layout_marginTop="8dp" />
 
     <!-- Office Location -->
-    <TextView
-        android:id="@+id/instructor_location"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Office Location: Building A, Room 123"
-        android:textSize="14sp"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="4dp" />
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_location"
+            android:contentDescription="Location Icon" />
+
+        <TextView
+            android:id="@+id/instructor_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Office Location: Building A, Room 123"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
 
     <!-- Office Hours -->
-    <TextView
-        android:id="@+id/instructor_hours"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Office Hours: Mon and Wed 10:00 AM - 12:00 PM"
-        android:textSize="14sp"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="4dp" />
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
 
-    <!-- Email Address -->
-    <TextView
-        android:id="@+id/instructor_email"
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_schedule"
+            android:contentDescription="Office Hours Icon" />
+
+        <TextView
+            android:id="@+id/instructor_hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Office Hours: Mon and Wed 10:00 AM - 12:00 PM"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <!-- Email -->
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email: instructor@example.com"
-        android:textSize="14sp"
-        android:textColor="@android:color/holo_blue_dark"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_marginTop="4dp" />
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_email"
+            android:contentDescription="Email Icon" />
+
+        <TextView
+            android:id="@+id/instructor_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email: instructor@example.com"
+            android:textSize="14sp"
+            android:textColor="@android:color/holo_blue_dark"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
 </LinearLayout>

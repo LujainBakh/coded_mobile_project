@@ -7,4 +7,5 @@
     <color name="darkblue">#7C97A0</color>
     <color name="grey">#F6F6F6</color>
     <color name="cardview_dark_background">#323232</color>
+    <color name="background_light">#F5F5F5</color>
 </resources>
