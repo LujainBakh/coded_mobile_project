@@ -1,12 +1,8 @@
-<ScrollView
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
     android:fitsSystemWindows="true"
@@ -30,81 +26,87 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-        <!-- Appointment Booking Section -->
-        <LinearLayout
+        <!-- Scrollable Content -->
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/toolbar"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp"
-            android:padding="16dp"
-            android:gravity="center">
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar">
 
-            <!-- Search for Instructor Label -->
-            <TextView
-                android:id="@+id/instructorSearchLabel"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Search for Instructor"
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="sans-serif-medium"/>
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:padding="16dp"
+                android:gravity="center">
 
-            <!-- Instructor Spinner (for selecting an instructor) -->
-            <Spinner
-                android:id="@+id/instructorSearch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:minHeight="48dp" />
+                <!-- Search for Instructor Label -->
+                <TextView
+                    android:id="@+id/instructorSearchLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Search for Instructor"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif-medium"/>
 
-            <!-- Pick a Date Label -->
-            <TextView
-                android:id="@+id/datePickerLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Pick a Date"
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="sans-serif-medium"/>
+                <!-- Instructor Spinner -->
+                <Spinner
+                    android:id="@+id/instructorSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:minHeight="48dp" />
 
-            <!-- Date Picker -->
-            <DatePicker
-                android:id="@+id/datePicker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp" />
+                <!-- Pick a Date Label -->
+                <TextView
+                    android:id="@+id/datePickerLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pick a Date"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif-medium"/>
 
-            <!-- Pick a Time Label -->
-            <TextView
-                android:id="@+id/timePickerLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Pick a Time"
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="sans-serif-medium"/>
+                <!-- Date Picker -->
+                <DatePicker
+                    android:id="@+id/datePicker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp" />
 
-            <!-- Time Spinner -->
-            <Spinner
-                android:id="@+id/timeSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:minHeight="48dp" />
+                <!-- Pick a Time Label -->
+                <TextView
+                    android:id="@+id/timePickerLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pick a Time"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif-medium"/>
 
-            <!-- Book Appointment Button -->
-            <Button
-                android:id="@+id/searchButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_button"
-                android:text="Book Appointment"
-                android:textColor="#000000" />
-        </LinearLayout>
+                <!-- Time Spinner -->
+                <Spinner
+                    android:id="@+id/timeSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:minHeight="48dp" />
+
+                <!-- Book Appointment Button -->
+                <Button
+                    android:id="@+id/searchButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_button"
+                    android:text="Book Appointment"
+                    android:textColor="#000000"
+                    tools:ignore="VisualLintButtonSize" />
+            </LinearLayout>
+        </ScrollView>
 
         <!-- Bottom Navigation -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -136,4 +138,3 @@
         app:itemIconTint="@color/darkblue"
         app:itemTextColor="@color/darkblue" />
 </androidx.drawerlayout.widget.DrawerLayout>
-</ScrollView>
