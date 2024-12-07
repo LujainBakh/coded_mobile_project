@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@android:color/white">
+
+    <!-- Instructor Name -->
+    <TextView
+        android:id="@+id/instructor_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Instructor Name"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black" />
+
+    <!-- Biography -->
+    <TextView
+        android:id="@+id/instructor_bio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Biography and qualifications"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="4dp" />
+
+    <!-- Office Location -->
+    <TextView
+        android:id="@+id/instructor_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Office Location: Building A, Room 123"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="4dp" />
+
+    <!-- Office Hours -->
+    <TextView
+        android:id="@+id/instructor_hours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Office Hours: Mon and Wed 10:00 AM - 12:00 PM"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="4dp" />
+
+    <!-- Email Address -->
+    <TextView
+        android:id="@+id/instructor_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email: instructor@example.com"
+        android:textSize="14sp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginTop="4dp" />
+</LinearLayout>
