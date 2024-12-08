@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+
+
         // Initialize Live Clock
         liveClock = findViewById(R.id.liveClock);
         handler.post(clockRunnable);

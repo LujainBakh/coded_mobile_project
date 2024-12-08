@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,7 +53,16 @@ public class ResourcesActivity extends AppCompatActivity implements NavigationVi
         navigationView.setNavigationItemSelectedListener(this);
 
         liveClock = findViewById(R.id.liveClock);
-        handler.post(clockRunnable); // Start the clock updates
+        handler.post(clockRunnable);
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        ImageButton navButton = findViewById(R.id.navButton);
+
+        navButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
 
         // Add toggle button to handle the navigation drawer open/close
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
