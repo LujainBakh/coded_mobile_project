@@ -61,8 +61,8 @@ public class ResourcesActivity extends AppCompatActivity implements NavigationVi
 
 
         LinearLayout sisBox = findViewById(R.id.box1);
-        LinearLayout libraryBox = findViewById(R.id.box2);
-        LinearLayout bbBox = findViewById(R.id.box3);
+        LinearLayout libraryBox = findViewById(R.id.box3);
+        LinearLayout bbBox = findViewById(R.id.box2);
         LinearLayout iauBox = findViewById(R.id.box4);
 
         // Add onClickListeners for each box
