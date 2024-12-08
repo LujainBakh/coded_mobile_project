@@ -23,7 +23,6 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
 
     private DrawerLayout drawerLayout;
     private DatabaseHelper dbHelper;
-
     private EditText email, university, firstName, lastName, phone;
     private TextView college;
     private Button updateButton;
@@ -149,16 +148,20 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
         if (item.getItemId() == R.id.nav_profile) {
             return true; // Stay on this activity
         } else if (item.getItemId() == R.id.nav_settings) {
+            // Start SettingsActivity
             startActivity(new Intent(this, SettingsActivity.class));
         } else if (item.getItemId() == R.id.nav_calculate) {
+            // Start GpaActivity
             startActivity(new Intent(this, GpaCalculator.class));
         } else if (item.getItemId() == R.id.nav_map) {
+            // Start MapActivity
             startActivity(new Intent(this, MapActivity.class));
         } else if (item.getItemId() == R.id.nav_logout) {
+            // Handle logout
             logout();
         }
 
-        drawerLayout.closeDrawer(GravityCompat.START); // Close the navigation drawer
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -171,9 +174,9 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
 
         // Redirect to LoginActivity
         Intent intent = new Intent(this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear activity stack
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish(); // Close current activity
+        finish();
     }
 
     @Override

@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat; // <-- Add this import
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -33,7 +33,7 @@ public class MapActivity extends AppCompatActivity implements
     private DrawerLayout drawerLayout;
     private GoogleMap mMap;
 
-    // Request code for location permissions
+    // this will let the app request for location permissions
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
     @SuppressLint("MissingInflatedId")
@@ -115,7 +115,10 @@ public class MapActivity extends AppCompatActivity implements
         LatLng MsLayan = new LatLng(26.385394, 50.190006);
         LatLng MsLujain = new LatLng(26.385847740119683, 50.18911728811018);
         LatLng MsJood = new LatLng(26.386196, 50.187678);
-        LatLng MrFaisal = new LatLng(26.394423, 50.195471);
+        LatLng DrFaisal = new LatLng(26.394423, 50.195471);
+        LatLng DrJood = new LatLng(26.385083, 50.189911);
+        LatLng DrAmjad = new LatLng(26.394839, 50.196429);
+
 
 
         // Add markers for each location
@@ -127,7 +130,10 @@ public class MapActivity extends AppCompatActivity implements
         mMap.addMarker(new MarkerOptions().position(MsLayan).title("Ms. Layan AlNahdi's Office: Building 650, First floor no.104-B"));
         mMap.addMarker(new MarkerOptions().position(MsLujain).title("Ms. Lujain Bakhurji's Office: Building 750, Second floor no.112"));
         mMap.addMarker(new MarkerOptions().position(MsJood).title("Ms. Jood Shuwaikan's Office: Building A11, Second floor no.108"));
-        mMap.addMarker(new MarkerOptions().position(MrFaisal).title("Mr. Faisal AlGhamdi's Office: Building A11, Second floor no.202"));
+        mMap.addMarker(new MarkerOptions().position(DrFaisal).title("Dr. Faisal AlGhamdi's Office: Building A11, Second floor no.202"));
+        mMap.addMarker(new MarkerOptions().position(DrJood).title("Dr. Jood AlGhamdi's Office: Building 650, Second floor no.210"));
+        mMap.addMarker(new MarkerOptions().position(DrAmjad).title("Dr. Amjad AlKhalifa's Office: Building A11, First floor no.101"));
+
 
     }
 

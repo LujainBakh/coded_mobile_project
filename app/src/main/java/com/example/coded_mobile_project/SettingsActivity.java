@@ -45,7 +45,6 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
 
 // Add onClickListeners for each box
         termsBox.setOnClickListener(v -> {
-            // Replace the current activity's content with the TermsConditionsFragment
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(android.R.id.content, new TermsConditionsFragment())
@@ -111,7 +110,7 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
             logout();
         }
 
-        drawerLayout.closeDrawer(GravityCompat.START); // Close the navigation drawer
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -125,9 +124,9 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
 
         // Redirect to LoginActivity
         Intent intent = new Intent(this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear activity stack
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish(); // Close current activity
+        finish();
     }
 
 
