@@ -13,7 +13,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     public static final String TABLE_NAME = "users";
 
-    // Column Names
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_FIRST_NAME = "first_name";
     public static final String COLUMN_LAST_NAME = "last_name";
@@ -29,13 +28,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     COLUMN_FIRST_NAME + " TEXT, " +
                     COLUMN_LAST_NAME + " TEXT, " +
-                    COLUMN_EMAIL + " TEXT UNIQUE, " + // UNIQUE to ensure no duplicate emails
+                    COLUMN_EMAIL + " TEXT UNIQUE, " +
                     COLUMN_PASSWORD + " TEXT, " +
                     COLUMN_PHONE + " TEXT, " +
                     COLUMN_UNIVERSITY + " TEXT, " +
                     COLUMN_COLLEGE + " TEXT);";
 
-    // Constructor
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -51,7 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // Insert User Data
+
     public boolean insertData(String firstName, String lastName, String email, String password,
                               String phone, String university, String college) {
         SQLiteDatabase db = null;

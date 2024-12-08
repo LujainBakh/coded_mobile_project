@@ -5,14 +5,12 @@ public class Course {
     private String grade;
     private int credits;
 
-    // Constructor
     public Course(String name, String grade, int credits) {
         this.name = name;
         this.grade = grade;
         this.credits = credits;
     }
 
-    // Getters
     public String getName() {
         return name;
     }
@@ -25,7 +23,6 @@ public class Course {
         return credits;
     }
 
-    // Setters (optional)
     public void setName(String name) {
         this.name = name;
     }

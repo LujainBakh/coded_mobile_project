@@ -28,29 +28,29 @@ public class InstructorsActivity extends AppCompatActivity implements Navigation
     private DrawerLayout drawerLayout;
     private LinearLayout container;
     private EditText searchBox;
-    private List<Instructor> instructors; // List to hold all instructor data
+    private List<Instructor> instructors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructors);
 
-        // Set up the Toolbar
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Initialize DrawerLayout and NavigationView
+
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // Add toggle button to handle the navigation drawer open/close
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        // Set up BottomNavigationView
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setSelectedItemId(R.id.instrcutors);
 
@@ -80,7 +80,7 @@ public class InstructorsActivity extends AppCompatActivity implements Navigation
         container = findViewById(R.id.instructor_container);
         searchBox = findViewById(R.id.search_box);
 
-        // Populate the instructors list
+
         instructors = new ArrayList<>();
         instructors.add(new Instructor("Ms. Amal AlHajri", "PhD in AI, Expert in Data Science and Machine Learning.", "Building 650, Second floor no.205-H", "Mon & Wed, 10:00 AM - 12:00 PM", "amal.hajri@example.com"));
         instructors.add(new Instructor("Ms. Layan AlNahdi", "MSc in Software Engineering, Researcher in Cloud Computing.", "Building 650, First floor no.104-B", "Tue & Thu, 1:00 PM - 3:00 PM", "layan.nahdi@example.com"));
@@ -90,7 +90,7 @@ public class InstructorsActivity extends AppCompatActivity implements Navigation
         instructors.add(new Instructor("Dr. Amjad AlKhalifa", "PhD in Computer Engineering, Specialist in Embedded Systems and IoT Security.", "Building A11, First floor no.101", "Tue & Thu, 10:00 AM - 12:00 PM", "amjad.alkhalifa@example.com"));
         instructors.add(new Instructor("Ms. Lujain Bakhurji", "MSc in Computer Science, Focused on Human-Computer Interaction and Software Development.", "Building 750, Second floor no.112", "Mon & Tue, 11:00 AM - 1:00 PM", "lujain.bakhurji@example.com"));
 
-        // Display all instructors initially
+
         displayInstructors(instructors);
 
         // Add search functionality

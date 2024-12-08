@@ -29,26 +29,25 @@ public class GpaCalculator extends AppCompatActivity implements NavigationView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gpa_calculator); // Update layout for CalendarActivity
+        setContentView(R.layout.activity_gpa_calculator);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new GpaCalculatorFragment())
                 .commit();
-        // Set up the Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Initialize DrawerLayout and NavigationView
+
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // Add toggle button to handle the navigation drawer open/close
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        // Set up BottomNavigationView
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
 
 
@@ -100,23 +99,22 @@ public class GpaCalculator extends AppCompatActivity implements NavigationView.O
             logout();
         }
 
-        drawerLayout.closeDrawer(GravityCompat.START); // Close the navigation drawer
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
 
     private void logout() {
-        // Clear the session using SessionManager
         SessionManager.clearSession(this);
 
-        // Show a toast message for feedback
+
         Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
 
-        // Redirect to LoginActivity
+
         Intent intent = new Intent(this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear activity stack
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish(); // Close current activity
+        finish();
     }
 
     @Override

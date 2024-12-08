@@ -32,18 +32,18 @@ public class CalendarActivity extends AppCompatActivity implements NavigationVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar); // Update layout for CalendarActivity
+        setContentView(R.layout.activity_calendar);
 
         // Set up the Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Initialize DrawerLayout and NavigationView
+
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // Add toggle button to handle the navigation drawer open/close
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
         drawerLayout.addDrawerListener(toggle);
@@ -51,7 +51,7 @@ public class CalendarActivity extends AppCompatActivity implements NavigationVie
 
         // Set up BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
-        bottomNavigationView.setSelectedItemId(R.id.calendar); // Default to Calendar menu item
+        bottomNavigationView.setSelectedItemId(R.id.calendar);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home) {
@@ -87,15 +87,12 @@ public class CalendarActivity extends AppCompatActivity implements NavigationVie
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
-                // Format the selected date to match the keys in the HashMap
                 String selectedDate = String.format("%02d/%02d/%04d", day, month + 1, year);
 
                 // Check if there's an event for the selected date
                 if (eventsMap.containsKey(selectedDate)) {
-                    // Show event in a dialog
                     showEventDialog(selectedDate, eventsMap.get(selectedDate));
                 } else {
-                    // No event for the selected date
                     Toast.makeText(CalendarActivity.this, "No events on this date.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -105,22 +102,18 @@ public class CalendarActivity extends AppCompatActivity implements NavigationVie
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.nav_profile) {
-            // Start ProfileActivity
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.nav_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.nav_calculate) {
-            // Start GpaActivity
             Intent intent = new Intent(this, GpaCalculator.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.nav_map) {
-            // Start MapActivity
             Intent intent = new Intent(this, MapActivity.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.nav_logout) {
-            // Handle Logout
             logout();
         }
 
@@ -130,17 +123,14 @@ public class CalendarActivity extends AppCompatActivity implements NavigationVie
 
 
     private void logout() {
-        // Clear the session using SessionManager
         SessionManager.clearSession(this);
 
-        // Show a toast message for feedback
         Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
 
-        // Redirect to LoginActivity
         Intent intent = new Intent(this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear activity stack
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish(); // Close current activity
+        finish();
     }
 
     @Override

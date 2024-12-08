@@ -34,10 +34,10 @@ public class GpaCalculatorFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View rootView = inflater.inflate(R.layout.fragment_gpa_calculator, container, false);
 
-        // Initialize UI Components
+
         courseName = rootView.findViewById(R.id.courseName);
         courseGradeSpinner = rootView.findViewById(R.id.courseGradeSpinner);
         courseCredits = rootView.findViewById(R.id.courseCredits);
@@ -46,7 +46,7 @@ public class GpaCalculatorFragment extends Fragment {
         courseListView = rootView.findViewById(R.id.courseListView);
         gpaTextView = rootView.findViewById(R.id.gpaTextView);
 
-        // Populate the Spinner with grade options
+
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(
                 getContext(),
                 R.array.grades_array,
@@ -55,11 +55,11 @@ public class GpaCalculatorFragment extends Fragment {
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         courseGradeSpinner.setAdapter(spinnerAdapter);
 
-        // Set up ListView Adapter
+
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, new ArrayList<>());
         courseListView.setAdapter(adapter);
 
-        // Add Button Click Listener
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +67,7 @@ public class GpaCalculatorFragment extends Fragment {
             }
         });
 
-        // Calculate Button Click Listener
+
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,11 +100,11 @@ public class GpaCalculatorFragment extends Fragment {
         com.example.gpa_calculator.Course course = new com.example.gpa_calculator.Course(name, grade, credits);
         courses.add(course);
 
-        // Update ListView
+
         adapter.add(course.getName() + " - Grade: " + course.getGrade() + ", Credits: " + course.getCredits());
         adapter.notifyDataSetChanged();
 
-        // Clear Input Fields
+
         courseName.setText("");
         courseCredits.setText("");
     }
@@ -126,7 +126,7 @@ public class GpaCalculatorFragment extends Fragment {
 
         double gpa = totalPoints / totalCredits;
 
-        // Update GPA TextView
+
         gpaTextView.setText(String.format("Your GPA: %.2f ", gpa));
     }
 
