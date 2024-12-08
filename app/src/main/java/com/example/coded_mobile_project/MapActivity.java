@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat; // <-- Add this import
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -33,7 +33,7 @@ public class MapActivity extends AppCompatActivity implements
     private DrawerLayout drawerLayout;
     private GoogleMap mMap;
 
-    // Request code for location permissions
+    // this will let the app request for location permissions
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
     @SuppressLint("MissingInflatedId")
