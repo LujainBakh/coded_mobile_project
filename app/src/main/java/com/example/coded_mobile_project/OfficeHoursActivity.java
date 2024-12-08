@@ -34,7 +34,7 @@ public class OfficeHoursActivity extends AppCompatActivity implements Navigation
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_office_hour); // Layout with appointment booking elements
+        setContentView(R.layout.activity_office_hour);
 
         // Set up the Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -53,7 +53,7 @@ public class OfficeHoursActivity extends AppCompatActivity implements Navigation
 
         // Set up BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
-        bottomNavigationView.setSelectedItemId(R.id.Officehours); // Default to Officehours menu item
+        bottomNavigationView.setSelectedItemId(R.id.Officehours);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home) {
@@ -67,7 +67,7 @@ public class OfficeHoursActivity extends AppCompatActivity implements Navigation
                 finish();
                 return true;
             } else if (item.getItemId() == R.id.Officehours) {
-                return true; // Stay on OfficeHoursActivity
+                return true;
             } else if (item.getItemId() == R.id.calendar) {
                 startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -78,7 +78,7 @@ public class OfficeHoursActivity extends AppCompatActivity implements Navigation
         });
 
         // Initialize appointment booking views
-        instructorSearch = findViewById(R.id.instructorSearch); // This is now a Spinner
+        instructorSearch = findViewById(R.id.instructorSearch);
         datePicker = findViewById(R.id.datePicker);
         timeSpinner = findViewById(R.id.timeSpinner);
         searchButton = findViewById(R.id.searchButton);
@@ -91,14 +91,13 @@ public class OfficeHoursActivity extends AppCompatActivity implements Navigation
         // Setup instructor options for the Spinner (predefined list of instructors)
         String[] instructors = {"Dr. Jood", "Dr. Amjad", "Prof. Layan", "Dr. Lujain", "Prof. Jood"};
         ArrayAdapter<String> instructorAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, instructors);
-        instructorSearch.setAdapter(instructorAdapter); // Set the adapter for the Spinner
+        instructorSearch.setAdapter(instructorAdapter);
 
         // Handle search button click
         searchButton.setOnClickListener(v -> {
-            // Get the selected instructor, date, and time
-            String selectedInstructor = instructorSearch.getSelectedItem().toString(); // Correctly get selected item
+            String selectedInstructor = instructorSearch.getSelectedItem().toString();
             int day = datePicker.getDayOfMonth();
-            int month = datePicker.getMonth() + 1; // Month is 0-indexed
+            int month = datePicker.getMonth() + 1;
             int year = datePicker.getYear();
             String selectedTime = timeSpinner.getSelectedItem().toString();
 
@@ -119,11 +118,10 @@ public class OfficeHoursActivity extends AppCompatActivity implements Navigation
                     .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            // Handle booking confirmation, e.g., save to database or make network request
                             Toast.makeText(OfficeHoursActivity.this, "Appointment Booked!", Toast.LENGTH_SHORT).show();
                         }
                     })
-                    .setNegativeButton("Cancel", null) // Do nothing on cancel
+                    .setNegativeButton("Cancel", null)
                     .show();
         });
     }
@@ -150,7 +148,7 @@ public class OfficeHoursActivity extends AppCompatActivity implements Navigation
             logout();
         }
 
-        drawerLayout.closeDrawer(GravityCompat.START); // Close the navigation drawer
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -163,9 +161,9 @@ public class OfficeHoursActivity extends AppCompatActivity implements Navigation
 
         // Redirect to LoginActivity
         Intent intent = new Intent(this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear activity stack
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish(); // Close current activity
+        finish();
     }
 
     @Override

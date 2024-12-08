@@ -32,14 +32,14 @@ public class ResourcesActivity extends AppCompatActivity implements NavigationVi
         @Override
         public void run() {
             updateClock();
-            handler.postDelayed(this, 1000); // Update every second
+            handler.postDelayed(this, 1000);
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_resources); // Update layout for InstructorsActivity
+        setContentView(R.layout.activity_resources);
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -136,7 +136,7 @@ public class ResourcesActivity extends AppCompatActivity implements NavigationVi
             logout();
         }
 
-        drawerLayout.closeDrawer(GravityCompat.START); // Close the navigation drawer
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -150,9 +150,9 @@ public class ResourcesActivity extends AppCompatActivity implements NavigationVi
 
         // Redirect to LoginActivity
         Intent intent = new Intent(this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear activity stack
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish(); // Close current activity
+        finish();
     }
 
     private void updateClock() {

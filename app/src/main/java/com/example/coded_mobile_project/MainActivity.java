@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         public void run() {
             updateClock();
-            handler.postDelayed(this, 1000); // Update every second
+            handler.postDelayed(this, 1000);
         }
     };
 
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // Initialize Live Clock
         liveClock = findViewById(R.id.liveClock);
-        handler.post(clockRunnable); // Start the clock updates
+        handler.post(clockRunnable);
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         ImageButton navButton = findViewById(R.id.navButton);
 
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        handler.removeCallbacks(clockRunnable); // Stop clock updates when activity is destroyed
+        handler.removeCallbacks(clockRunnable);
     }
 
     @Override
@@ -145,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.nav_settings) {
+            // Start SettingsActivity
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.nav_calculate) {
@@ -156,11 +157,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(this, MapActivity.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.nav_logout) {
-            // Handle Logout
+            // Handle logout
             logout();
         }
 
-        drawerLayout.closeDrawer(GravityCompat.START); // Close the navigation drawer
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -174,9 +175,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // Redirect to LoginActivity
         Intent intent = new Intent(this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear activity stack
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish(); // Close current activity
+        finish();
     }
 
     @Override

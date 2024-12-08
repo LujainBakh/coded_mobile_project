@@ -43,10 +43,9 @@ public class LoginActivity extends AppCompatActivity {
 
         // Check if user is already logged in
         if (SessionManager.isLoggedIn(this)) {
-            // Redirect to MainActivity
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
-            finish(); // Close LoginActivity to prevent going back
+            finish();
         }
 
         // Set up binding and UI elements
@@ -59,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Login Button Click Listener
         binding.loginButton.setOnClickListener(view -> {
-            String emailInput = binding.email.getText().toString().trim(); // Trim inputs
+            String emailInput = binding.email.getText().toString().trim();
             String passwordInput = binding.password.getText().toString().trim();
 
             if (emailInput.isEmpty() || passwordInput.isEmpty()) {
@@ -67,13 +66,11 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 boolean checkCredentials = dbHelp.checkEmailPassword(emailInput, passwordInput);
                 if (checkCredentials) {
-                    // Save login state using Shared Preferences
                     SessionManager.saveLoginState(LoginActivity.this, true, emailInput);
-
                     Toast.makeText(LoginActivity.this, "Login Successfully!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
-                    finish(); // Close LoginActivity to prevent going back
+                    finish();
                 } else {
                     Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
                 }
@@ -85,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (dbHelp != null) {
-            dbHelp.close(); // Close database helper to free resources
+            dbHelp.close();
         }
     }
 }
