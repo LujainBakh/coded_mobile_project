@@ -23,11 +23,11 @@ public class LoginActivity extends AppCompatActivity {
         dbHelp = new DatabaseHelper(this);
 
         // Insert a test user into the database (if not already exists)
-        if (!dbHelp.checkEmail("22100001234@iau.edu.sa")) {
+        if (!dbHelp.checkEmail("2210001234@iau.edu.sa")) {
             boolean isInserted = dbHelp.insertData(
                     "Alaa", // First Name
                     "Hariri", // Last Name
-                    "22100001234@iau.edu.sa", // Email
+                    "2210001234@iau.edu.sa", // Email
                     "password123", // Password
                     "0505800101", // Phone
                     "Imam Abdulrahman Bin Faisal University", // University
